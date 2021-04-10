@@ -1,0 +1,43 @@
+.hero {
+  .hero-header {
+
+    &__title {
+      font-family: Gilroy Bold, sans-serif;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+    }
+
+    &__description {
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      color: #575757;
+    }
+  }
+
+  .hero-body {
+    &__search-switch {
+      display: flex;
+      height: 40px;
+      border: 1px solid #BEBEBE;
+      border-radius: 10px;
+      font-weight: 600;
+
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+
+        &.active {
+          background: black;
+          color: white;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
+
+
