@@ -1,4 +1,6 @@
 .hero {
+  margin-bottom: 20px;
+
   .hero-header {
 
     &__title {
@@ -17,26 +19,7 @@
   }
 
   .hero-body {
-    &__search-switch {
-      display: flex;
-      height: 40px;
-      border: 1px solid #BEBEBE;
-      border-radius: 10px;
-      font-weight: 600;
-
-      .item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
-
-        &.active {
-          background: black;
-          color: white;
-          border-radius: 10px;
-        }
-      }
-    }
+    
   }
 }
 

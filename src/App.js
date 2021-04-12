@@ -1,16 +1,22 @@
 import "./App.scss";
-import Header from "./components/Header/Header";
 import React from "react";
+
+import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
+import Search from "./components/Search/Search";
+
+import {BrowserRouter as Router} from 'react-router-dom'
+
 
 function App() {
     return (
-        <>
+        <Router>
             <Header/>
             <div className="container">
                 <Hero/>
+                <Search />
             </div>
-        </>
+        </Router>
     );
 }
 

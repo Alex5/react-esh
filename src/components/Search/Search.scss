@@ -1,0 +1,180 @@
+.search {
+  &-result {
+    .search-placeholder {
+      img {
+        width: 100%;
+      }
+    }
+
+    &__add-ingredients {
+      background: #000000;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.35);
+      border-radius: 12px;
+      height: 50px;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.search-block {
+  position: relative;
+
+  &__input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    border: 1px solid #bebebe;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    outline: none;
+    justify-content: center;
+    transition: ease-in 0.1s;
+    font-weight: bold;
+    font-size: 15px;
+
+    &:focus {
+      border-radius: 10px;
+      border-color: black;
+    }
+  }
+
+  &__input-img {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+  }
+
+  &__search-switch {
+    display: flex;
+    height: 40px;
+    border: 1px solid #bebebe;
+    border-radius: 10px;
+    font-weight: 600;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    .selected {
+      background: black;
+      color: white;
+      border-radius: 10px;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+  }
+}
+
+.search-popup {
+  background: #fff;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+
+  &__body {
+    padding: 0 15px 0 15px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    margin-bottom: 15px;
+
+    &_title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    &_close-btn button {
+      background: none;
+      border: none;
+    }
+  }
+
+  &__input {
+    margin-bottom: 15px;
+
+    input {
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-bottom: 1px solid gray;
+      padding-left: 10px;
+      font-size: 18px;
+      outline: none;
+      transition: 0.1s;
+
+      &:focus {
+        border: none;
+        border-bottom: 1px solid black;
+      }
+    }
+  }
+
+  &__chips {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    margin-bottom: 15px;
+
+    .chip {
+      display: flex;
+      align-items: center;
+      padding: 7px 12px 7px 12px;
+      border: 1px solid gray;
+      border-radius: 50px;
+      margin-right: 15px;
+
+      &__name {
+        font-weight: 600;
+        font-size: 14px;
+        margin-right: 10px;
+       white-space: nowrap;
+      }
+
+      &__delete-btn {
+        display: flex;
+      }
+    }
+  }
+
+  &__result {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      height: 300px;
+      overflow: auto;
+
+      li {
+        font-size: 18px;
+        color: grey;
+        margin-bottom: 10px;
+    
+      }
+    }
+  }
+}
