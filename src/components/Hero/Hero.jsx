@@ -4,8 +4,42 @@ import foodEat from "../../assets/img/foodEat.svg";
 import closeChip from "../../assets/img/cancel_black_24dp.svg";
 
 import "./Hero.scss";
+import axios from "axios";
 
-const Hero = ({chipItems, deleteChipItem}) => {
+const Hero = ({ chipItems, deleteChipItem }) => {
+  const onGetRecipes = () => {
+    let newChipItems = []
+    
+    chipItems.forEach(ingredients => {
+      newChipItems.push({
+        id: ingredients._id,
+        count: 0.0,
+        exclude: false,
+      });
+    });
+    console.log(newChipItems);
+
+    // let config = {
+    //   url: 'https://intense-reef-89831.herokuapp.com/getRecipes',
+    //   data: newChipItems,
+    //   params: {
+    //     mode: 1
+    //   }
+    // }
+  
+    axios('https://intense-reef-89831.herokuapp.com/getRecipes/', newChipItems, {
+      params: {
+        mode: 1
+      }
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((errot) => {
+        console.log(errot)
+      });
+  };
+
   return (
     <section className="hero">
       <div className="hero-body">
@@ -15,7 +49,10 @@ const Hero = ({chipItems, deleteChipItem}) => {
               <div key={item._id} className="chip">
                 <div className="chip__header">
                   <div className="chip__header_title">{item.name}</div>
-                  <button onClick={() => deleteChipItem(item)} className="chip__header_close-btn">
+                  <button
+                    onClick={() => deleteChipItem(item)}
+                    className="chip__header_close-btn"
+                  >
                     <img src={closeChip} alt="" />
                   </button>
                 </div>
@@ -26,11 +63,12 @@ const Hero = ({chipItems, deleteChipItem}) => {
                 </div>
               </div>
             ))}
+            <button onClick={onGetRecipes}>
+              Найти рецепты
+            </button>
           </div>
         ) : (
-          <div className="search-placeholder">
-            
-          </div>
+          <div className="search-placeholder"></div>
         )}
       </div>
     </section>
