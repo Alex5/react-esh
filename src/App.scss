@@ -8,6 +8,16 @@ body {
   margin-right: auto;
   margin-left: auto;
   font-family: Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+
+  &__search {
+    flex: 1;
+  }
+
+  &__result {
+    flex: 1;
+  }
 }
 
 @media (min-width: 576px) {
@@ -23,5 +33,6 @@ body {
 @media (min-width: 1200px) {
   .container {
     width: 1170px;
+    flex-direction: row;
   }
 }

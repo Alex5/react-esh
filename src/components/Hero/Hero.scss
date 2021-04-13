@@ -1,26 +1,64 @@
 .hero {
   margin-bottom: 20px;
 
-  .hero-header {
-
-    &__title {
-      font-family: Gilroy Bold, sans-serif;
-      font-size: 1.3rem;
-      text-transform: uppercase;
-    }
-
-    &__description {
-      font-family: Roboto, sans-serif;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 18px;
-      color: #575757;
-    }
-  }
-
   .hero-body {
-    
+    height: 550px;
+    overflow: auto;
+    margin-left: 15px;
+
+    .added-chips {
+      margin-bottom: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+
+      .chip {
+        margin-bottom: 15px;
+        border: 1px solid #a6a6a6;
+        padding: 15px;
+        border-radius: 10px;
+        flex: 1;
+        margin-right: 10px;
+
+        &__header {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 15px;
+
+          button {
+            background: none;
+            border: none;
+            cursor: pointer;
+          }
+
+          &_title {
+            font-size: 18px;
+            font-weight: 600;
+            
+            h1 {
+              margin: 0;
+            }
+          }
+        }
+
+        &__body {
+          margin-bottom: 15px;
+        }
+
+        &__footer {
+          display: flex;
+          justify-content: space-around;
+
+
+        }
+      }
+    }
+
+    .search-placeholder {
+      background: #ffffff;
+      background-image: url("../../assets/img/foodEat.svg");
+      background-size: cover;
+      height: 550px;
+    }
   }
 }
-
-

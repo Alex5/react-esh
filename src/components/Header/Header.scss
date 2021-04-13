@@ -1,12 +1,40 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   background: #f3f3f3;
   padding: 15px;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 6px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(212, 212, 212, 0.23);
+
+  &__container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+  }
 
   &__logo {
     align-self: center;
+  }
+}
+
+@media (min-width: 576px) {
+  .header__container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .header__container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .header__container {
+    width: 1170px;
+    
   }
 }
