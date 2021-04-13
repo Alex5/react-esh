@@ -8,9 +8,9 @@ import axios from "axios";
 
 const Hero = ({ chipItems, deleteChipItem }) => {
   const onGetRecipes = () => {
-    let newChipItems = []
-    
-    chipItems.forEach(ingredients => {
+    let newChipItems = [];
+
+    chipItems.forEach((ingredients) => {
       newChipItems.push({
         id: ingredients._id,
         count: 0.0,
@@ -19,27 +19,24 @@ const Hero = ({ chipItems, deleteChipItem }) => {
     });
     console.log(newChipItems);
 
-    // let config = {
-    //   url: 'https://intense-reef-89831.herokuapp.com/getRecipes',
-    //   data: newChipItems,
-    //   params: {
-    //     mode: 1
-    //   }
-    // }
-  
-    axios('https://intense-reef-89831.herokuapp.com/getRecipes/', newChipItems, {
+    let config = {
+      method: 'post',
+      url: "https://intense-reef-89831.herokuapp.com/getRecipes",
+      data: newChipItems,
       params: {
-        mode: 1
-      }
-    })
+        mode: 1,
+      },
+    };
+
+    axios(config)
       .then((res) => {
         console.log(res);
       })
       .catch((errot) => {
-        console.log(errot)
+        console.log(errot);
       });
   };
-
+  
   return (
     <section className="hero">
       <div className="hero-body">
@@ -63,9 +60,7 @@ const Hero = ({ chipItems, deleteChipItem }) => {
                 </div>
               </div>
             ))}
-            <button onClick={onGetRecipes}>
-              Найти рецепты
-            </button>
+            <button onClick={onGetRecipes}>Найти рецепты</button>
           </div>
         ) : (
           <div className="search-placeholder"></div>
