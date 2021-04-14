@@ -5,26 +5,30 @@ import axios from "axios";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import Search from "./components/Search/Search";
+import IngredientsResult from "./components/IngredientsResults/IngredientsResult";
 
-import { BrowserRouter as Router } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 function App() {
   const [filterIngredients, setFilterIngredients] = React.useState([]);
-  const [loadingIngredients, setLoadingIngredients] = React.useState(false);
+  const [loadingIngredients, setLoadingIngredients] = React.useState(null);
 
   const onIngrInput = (e) => {
-    e.target.value.trim()
-    if ( e.target.value.length >= 3) {
+    e.target.value.trim();
+
+    if (e.target.value.length >= 3) {
+      setLoadingIngredients(true);
       axios
         .get(
           `https://intense-reef-89831.herokuapp.com/getIngredients/?q=${e.target.value}`
         )
         .then((res) => {
           setFilterIngredients(res.data);
-          setLoadingIngredients(true)
-        })
-        .then(() => {
-          setLoadingIngredients(false)
+          setLoadingIngredients(false);
         });
     } else {
       setFilterIngredients([]);
@@ -45,23 +49,64 @@ function App() {
     setChipItems([...deletingChipItems]);
   };
 
+  const [recipesState, setRecipesState] = React.useState([])
+
+  const onGetRecipes = () => {
+    let newChipItems = [];
+
+    chipItems.forEach((ingredients) => {
+      newChipItems.push({
+        id: ingredients._id,
+        count: 0.0,
+        exclude: false,
+      });
+    });
+
+    let config = {
+      method: "post",
+      url: "https://intense-reef-89831.herokuapp.com/getRecipes",
+      data: newChipItems,
+      params: {
+        mode: 1,
+      },
+    };
+
+    axios(config)
+      .then(({data}) => {
+        setRecipesState(data.items);
+      })
+      .catch((errot) => {
+        console.log(errot);
+      });
+  };
+
   return (
     <Router>
       <Header />
-      <div className="container">
-        <div className="container__search">
-          <Search
-            filterIngredients={filterIngredients}
-            onIngrInput={onIngrInput}
-            addChipItems={addChipItems}
-            chipItems={chipItems}
-            loadingIngredients={loadingIngredients}
-          />
+      <Switch>
+        <div className="container">
+          <Route path="/">
+            <div className="container__search">
+              <Search
+                filterIngredients={filterIngredients}
+                onIngrInput={onIngrInput}
+                addChipItems={addChipItems}
+                chipItems={chipItems}
+                loadingIngredients={loadingIngredients}
+              />
+            </div>
+            <div className="container__result">
+              <Hero chipItems={chipItems} 
+              deleteChipItem={deleteChipItem} 
+              onGetRecipes={onGetRecipes}
+              />
+            </div>
+          </Route>
+          <Route path="/ingredients/result">
+            <IngredientsResult recipesState={recipesState}/>
+          </Route>
         </div>
-        <div className="container__result">
-          <Hero chipItems={chipItems} deleteChipItem={deleteChipItem} />
-        </div>
-      </div>
+      </Switch>
     </Router>
   );
 }

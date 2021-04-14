@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from '../../services/Loader'
 
 import closeChip from "../../assets/img/cancel_black_24dp.svg";
 
@@ -34,8 +35,8 @@ const SearchPopUp = ({
         </div>
         <div className="search-popup__result">
           <ul>
-            {loadingIngredients ? 'Загрузка...' : filterIngredients &&
-              filterIngredients.map((item) => (
+            {loadingIngredients ? <Loader />
+              :   filterIngredients.map((item) => (
                 <li onClick={() => addChipItems(item)} key={item._id}>
                   {item.name}
                 </li>

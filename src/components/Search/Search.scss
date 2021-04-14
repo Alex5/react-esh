@@ -88,7 +88,7 @@
 .search-popup {
   background: #fff;
   overflow: hidden;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(230, 230, 230, 0.16), 0 3px 6px rgba(151, 151, 151, 0.23);
   border-radius: 10px;
 
   &__body {
@@ -102,7 +102,7 @@
     margin-bottom: 15px;
 
     &_title {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 600;
       
       

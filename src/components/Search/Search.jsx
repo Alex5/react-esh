@@ -11,7 +11,7 @@ const Search = ({
   onIngrInput,
   addChipItems,
   chipItems,
-  loadingIngredients={loadingIngredients}
+  loadingIngredients
 }) => {
   return (
     <section className="search">
