@@ -6,7 +6,14 @@ import Loader from "../../services/Loader";
 
 import "./Hero.scss";
 
-const Hero = ({ chipItems, deleteChipItem, recipesState, loadingRecipes }) => {
+const Hero = ({
+  chipItems,
+  deleteChipItem,
+  recipesState,
+  loadingRecipes,
+  ingrCount,
+  setIngrCount
+}) => {
   return (
     <section className="hero">
       <div className="hero-body">
@@ -28,13 +35,20 @@ const Hero = ({ chipItems, deleteChipItem, recipesState, loadingRecipes }) => {
                     </button>
                   </div>
                   {/* <div className="chip__body">
-                      <label htmlFor="ingr-weight">Вес</label>
-                    <input id="ingr-weight" type="number"/>
-                    </div>  */}
-                  <div className="chip__footer">
+                    <label htmlFor="ingr-weight">Количество: {item.countName}</label>
+                    <input
+                      value={ingrCount}
+                      onInput={(e) => {
+                        setIngrCount(e.target.value);
+                      }}
+                      id="ingr-weight"
+                      type="number"
+                    />
+                  </div> */}
+                  {/* <div className="chip__footer">
                     <button>изменить</button>
                     <button>исключить</button>
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>

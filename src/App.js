@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import Search from "./components/Search/Search";
 import IngredientsResult from "./components/IngredientsResults/IngredientsResult";
+import Alert from "./services/Alert";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -13,15 +14,18 @@ function App() {
   const [filterIngredients, setFilterIngredients] = React.useState([]);
   const [loadingIngredients, setLoadingIngredients] = React.useState(null);
   const [loadingRecipes, setLoadingRecipes] = React.useState(null);
+  const [recipesState, setRecipesState] = React.useState([]);
+  const [chipItems, setChipItems] = React.useState([]);
+  const [inputIngredients, setInputIngredients] = React.useState("");
+  const [ingrCount, setIngrCount] = React.useState(0.0)
+  const [state, setstate] = React.useState()
 
-  const onIngrInput = (e) => {
-    e.target.value.trim();
-
-    if (e.target.value.length >= 3) {
+  const onIngrInput = () => {
+    if (inputIngredients.length >= 3) {
       setLoadingIngredients(true);
       axios
         .get(
-          `https://intense-reef-89831.herokuapp.com/getIngredients/?q=${e.target.value}`
+          `https://intense-reef-89831.herokuapp.com/getIngredients/?q=${inputIngredients}`
         )
         .then((res) => {
           setFilterIngredients(res.data);
@@ -32,32 +36,34 @@ function App() {
     }
   };
 
-  const [chipItems, setChipItems] = React.useState([]);
-
   const addChipItems = (elem) => {
     let chipItemsArr = new Set([...chipItems]);
     chipItemsArr.add(elem);
     setChipItems([...chipItemsArr]);
-    getRecipes()
+    setInputIngredients('')
   };
 
   const deleteChipItem = (item) => {
     let deletingChipItems = new Set([...chipItems]);
     deletingChipItems.delete(item);
     setChipItems([...deletingChipItems]);
-    getRecipes()
   };
 
-  const [recipesState, setRecipesState] = React.useState([]);
+  React.useEffect(() => {
+    getRecipes();
+  }, [chipItems, ingrCount]);
+
+  React.useEffect(() => {
+    onIngrInput();
+  }, [inputIngredients]);
 
   const getRecipes = () => {
-    
     let newChipItems = [];
 
     chipItems.forEach((ingredients) => {
       newChipItems.push({
         id: ingredients._id,
-        count: 0.0,
+        count: ingrCount,
         exclude: false,
       });
     });
@@ -71,16 +77,15 @@ function App() {
       },
     };
 
-    setLoadingRecipes(true)
+    setLoadingRecipes(true);
 
     axios(config)
       .then(({ data }) => {
         setRecipesState(data.items);
         setLoadingRecipes(false);
-        console.log(data.items);
       })
-      .catch((errot) => {
-        console.log(errot);
+      .catch(() => {
+        <Alert />;
       });
   };
 
@@ -101,6 +106,9 @@ function App() {
                 addChipItems={addChipItems}
                 chipItems={chipItems}
                 loadingIngredients={loadingIngredients}
+                setInputIngredients={setInputIngredients}
+                inputIngredients={inputIngredients}
+                ingrCount={ingrCount}
               />
             </div>
             <div className="container__result">
@@ -109,6 +117,8 @@ function App() {
                 deleteChipItem={deleteChipItem}
                 recipesState={recipesState}
                 loadingRecipes={loadingRecipes}
+                ingrCount={ingrCount}
+                setIngrCount={setIngrCount}
               />
             </div>
           </Route>

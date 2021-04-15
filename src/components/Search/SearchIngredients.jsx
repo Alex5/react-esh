@@ -6,10 +6,11 @@ import closeChip from "../../assets/img/cancel_black_24dp.svg";
 
 const SearchIndgredients = ({
   filterIngredients,
-  onIngrInput,
   addChipItems,
   chipItems,
-  loadingIngredients
+  loadingIngredients,
+  setInputIngredients,
+  inputIngredients
 }) => {
   return (
     <div className="search-popup">
@@ -19,7 +20,11 @@ const SearchIndgredients = ({
         <div className="search-popup__header_close-btn"></div>
       </div>
       <div className="search-popup__input">
-        <input type="search" onInput={(e) => onIngrInput(e)} />
+        <input 
+        placeholder='Введите название ингредиента'
+        value={inputIngredients} 
+        type="search" 
+        onInput={(e) => setInputIngredients(e.target.value)} />
       </div>
       <div className="search-popup__chips">
         {chipItems &&

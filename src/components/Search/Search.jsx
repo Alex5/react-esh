@@ -11,7 +11,9 @@ const Search = ({
   onIngrInput,
   addChipItems,
   chipItems,
-  loadingIngredients
+  loadingIngredients,
+  setInputIngredients,
+  inputIngredients
 }) => {
 
   return (
@@ -47,6 +49,9 @@ const Search = ({
                 addChipItems={addChipItems}
                 chipItems={chipItems}
                 loadingIngredients={loadingIngredients}
+                setInputIngredients={setInputIngredients}
+                inputIngredients={inputIngredients}
+
               />
             </Route>
             <Route path="/recipes">
