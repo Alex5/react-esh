@@ -7,11 +7,7 @@ import Hero from "./components/Hero/Hero";
 import Search from "./components/Search/Search";
 import IngredientsResult from "./components/IngredientsResults/IngredientsResult";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [filterIngredients, setFilterIngredients] = React.useState([]);
@@ -49,7 +45,7 @@ function App() {
     setChipItems([...deletingChipItems]);
   };
 
-  const [recipesState, setRecipesState] = React.useState([])
+  const [recipesState, setRecipesState] = React.useState([]);
 
   const onGetRecipes = () => {
     let newChipItems = [];
@@ -72,8 +68,10 @@ function App() {
     };
 
     axios(config)
-      .then(({data}) => {
+      .then(({ data }) => {
         setRecipesState(data.items);
+        setLoadingIngredients(false);
+        console.log(data.items);
       })
       .catch((errot) => {
         console.log(errot);
@@ -83,8 +81,12 @@ function App() {
   return (
     <Router>
       <Header />
-      <Switch>
-        <div className="container">
+      <div className="container">
+        <Switch>
+          <Route path="/ingredients/result">
+            <IngredientsResult recipesState={recipesState} />
+          </Route>
+
           <Route path="/">
             <div className="container__search">
               <Search
@@ -96,17 +98,15 @@ function App() {
               />
             </div>
             <div className="container__result">
-              <Hero chipItems={chipItems} 
-              deleteChipItem={deleteChipItem} 
-              onGetRecipes={onGetRecipes}
+              <Hero
+                chipItems={chipItems}
+                deleteChipItem={deleteChipItem}
+                onGetRecipes={onGetRecipes}
               />
             </div>
           </Route>
-          <Route path="/ingredients/result">
-            <IngredientsResult recipesState={recipesState}/>
-          </Route>
-        </div>
-      </Switch>
+        </Switch>
+      </div>
     </Router>
   );
 }
