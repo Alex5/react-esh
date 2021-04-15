@@ -4,40 +4,38 @@
   .hero-body {
     height: 550px;
     overflow: auto;
-    margin-left: 15px;
+    margin-left: 50px;
 
     .added-chips {
       margin-bottom: 25px;
       display: flex;
       flex-wrap: wrap;
       flex-direction: row;
+      gap: 10px;
 
       .chip {
-        margin-bottom: 15px;
-        border: 1px solid #a6a6a6;
+        border: 1px solid #dddddd;
         padding: 15px;
         border-radius: 10px;
-        flex: 1;
-        margin-right: 10px;
 
         &__header {
           display: flex;
           justify-content: space-between;
           margin-bottom: 15px;
+          align-items: center;
 
           button {
-            background: none;
             border: none;
             cursor: pointer;
+            padding: 0;
+            height: 24px;
+            background: transparent;
           }
 
           &_title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
-
-            h1 {
-              margin: 0;
-            }
+            margin-right: 5px;
           }
         }
 
@@ -48,30 +46,60 @@
         &__footer {
           display: flex;
           justify-content: space-around;
+          color: gainsboro;
+
+          button {
+            padding: 5px;
+            border: 1px solid rgb(202, 202, 202);
+            border-radius: 5px;
+            color: rgb(158, 158, 158);
+            background: none;
+            transition: 0.3s;
+            font-style: 16px;
+
+            &:first-child {
+              margin-right: 10px;
+            }
+
+            &:hover {
+              color: black;
+              border: 1px solid black;
+              cursor: pointer;
+            }
+          }
         }
       }
 
       &__btn {
-        text-align: center;
+        display: flex;
         position: sticky;
-        bottom: 10px;
+        justify-content: center;
+        border: none;
+        background: #83cc98;
+        border-radius: 15px;
+        font-weight: 500;
+        font-size: 18px;
+        transition: 0.3s;
+        height: 50px;
+        max-width: 250px;
 
-        button {
-          width: 223px;
-          height: 48px;
-          border: none;
-          background: #83cc98;
-          border-radius: 15px;
+        a {
+          display: flex;
           color: white;
-          font-weight: 500;
-          font-size: 18px;
-          transition: 0.3s;
+          text-decoration: none;
+          align-items: center;
+          font-weight: bold;
 
-          &:hover {
-            cursor: pointer;
-            transform: translateY(-3px);
-            box-shadow: 0 3px 6px rgba(153, 153, 153, 0.16), 0 3px 6px rgba(151, 151, 151, 0.23);
+          .lds-ring div {
+            border-color: rgb(255, 255, 255) transparent transparent transparent;
           }
+        }
+
+        &:hover {
+          cursor: pointer;
+          transform: translateY(-3px);
+          box-shadow: 0 3px 6px rgba(153, 153, 153, 0.16),
+            0 3px 6px rgba(151, 151, 151, 0.23);
         }
       }
     }

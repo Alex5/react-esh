@@ -1,12 +1,9 @@
 import React from "react";
-
-import loaderImg from "../assets/img/Rolling.svg";
+import './Loader.css'
 
 const Loader = () => {
   return (
-    <div>
-      <img src={loaderImg} alt="" />
-    </div>
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
   );
 };
 

@@ -2,8 +2,6 @@ import React from "react";
 
 import { Route, useHistory } from "react-router-dom";
 
-import Loader from "../../services/Loader";
-
 const IngredientsResult = ({ recipesState }) => {
   const history = useHistory();
 

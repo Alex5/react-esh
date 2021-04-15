@@ -13,6 +13,7 @@ const Search = ({
   chipItems,
   loadingIngredients
 }) => {
+
   return (
     <section className="search">
       <div className="hero-header__title">
@@ -33,9 +34,9 @@ const Search = ({
           >
             Ингредиенты
           </NavLink>
-          <NavLink className="item" activeClassName="selected" to="/recipes">
+          {/* <NavLink className="item" activeClassName="selected" to="/recipes">
             Рецепты
-          </NavLink>
+          </NavLink> */}
         </div>
         <div className="search-result">
           <Switch>

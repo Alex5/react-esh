@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   const [filterIngredients, setFilterIngredients] = React.useState([]);
   const [loadingIngredients, setLoadingIngredients] = React.useState(null);
+  const [loadingRecipes, setLoadingRecipes] = React.useState(null);
 
   const onIngrInput = (e) => {
     e.target.value.trim();
@@ -37,17 +38,20 @@ function App() {
     let chipItemsArr = new Set([...chipItems]);
     chipItemsArr.add(elem);
     setChipItems([...chipItemsArr]);
+    getRecipes()
   };
 
   const deleteChipItem = (item) => {
     let deletingChipItems = new Set([...chipItems]);
     deletingChipItems.delete(item);
     setChipItems([...deletingChipItems]);
+    getRecipes()
   };
 
   const [recipesState, setRecipesState] = React.useState([]);
 
-  const onGetRecipes = () => {
+  const getRecipes = () => {
+    
     let newChipItems = [];
 
     chipItems.forEach((ingredients) => {
@@ -67,10 +71,12 @@ function App() {
       },
     };
 
+    setLoadingRecipes(true)
+
     axios(config)
       .then(({ data }) => {
         setRecipesState(data.items);
-        setLoadingIngredients(false);
+        setLoadingRecipes(false);
         console.log(data.items);
       })
       .catch((errot) => {
@@ -101,7 +107,8 @@ function App() {
               <Hero
                 chipItems={chipItems}
                 deleteChipItem={deleteChipItem}
-                onGetRecipes={onGetRecipes}
+                recipesState={recipesState}
+                loadingRecipes={loadingRecipes}
               />
             </div>
           </Route>
