@@ -107,7 +107,8 @@
     .search-placeholder {
       background: #ffffff;
       background-image: url("../../assets/img/foodEat.svg");
-      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
       height: 550px;
     }
   }
