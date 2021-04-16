@@ -18,7 +18,6 @@ function App() {
   const [chipItems, setChipItems] = React.useState([]);
   const [inputIngredients, setInputIngredients] = React.useState("");
   const [ingrCount, setIngrCount] = React.useState(0.0)
-  const [state, setstate] = React.useState()
 
   const onIngrInput = () => {
     if (inputIngredients.length >= 3) {
