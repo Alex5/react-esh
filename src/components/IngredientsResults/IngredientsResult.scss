@@ -1,38 +1,38 @@
 .ingredients-result {
   &__header {
     margin-bottom: 15px;
-
-    &_change-btn button {
-      padding: 15px;
-      border: 2px solid rgb(165, 165, 165);
-      background: none;
-      border-radius: 15px;
-      color: rgb(141, 141, 141);
-      font-style: 16px;
-      font-weight: 600;
-
-      &:hover {
-        border: 2px solid black;
-        color: black;
-      }
-    }
   }
 }
 
 .ingredients-result__body {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3vw;
 
   &-item {
     display: flex;
-    flex: 1 1 calc((100% / 2) - 2rem);
+    padding: 15px;
+    transition: 0.3s;
+    color: rgb(46, 46, 46);
 
-    &__img img {
-      width: 300px;
-      height: 300px;
+    &:hover {
+      padding: 15px;
+      background: rgb(236, 236, 236);
       border-radius: 15px;
-      margin-right: 15px;
+      cursor: pointer;
+    }
+
+    &__img {
+      width: 250px;
+      height: 200px;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-right: 15px;
+      }
     }
 
     &__body {
@@ -41,36 +41,17 @@
       height: 100%;
       justify-content: space-between;
       padding-left: 15px;
+      flex: 1;
 
       &-name {
         font-size: 22px;
         font-weight: 600;
+        margin-bottom: 10px;
       }
 
-      &-lists ul {
-        list-style: none;
-        padding: 0;
-
-        li {
-          font-size: 16px;
-          margin-bottom: 5px;
-        }
-      }
-
-      &-open-btn button {
-        padding: 15px;
-        border: 2px solid rgb(165, 165, 165);
-        background: none;
-        border-radius: 15px;
-        color: rgb(141, 141, 141);
-        font-style: 16px;
-        font-weight: 600;
-  
-        &:hover {
-          border: 2px solid black;
-          color: black;
-        }
-      }
+      &-lists div {
+        margin-bottom: 5px;
+      } 
     }
   }
 }

@@ -1,7 +1,9 @@
 import { React, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+
 import Loader from "../../services/Loader";
+import Button from '../../services/Button'
 
 const RecipesCart = ({ resultOptions }) => {
   const [instruction, setInstruction] = useState({});
@@ -28,7 +30,7 @@ const RecipesCart = ({ resultOptions }) => {
       ) : (
         <div>
           <div>
-            <button onClick={history.goBack}>Назад</button>
+            <Button secondary onClick={history.goBack} text={"Назад"}></Button>
           </div>
           <div>
             <h1>{instruction.name}</h1>
