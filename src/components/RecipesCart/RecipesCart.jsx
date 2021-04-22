@@ -3,7 +3,10 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import Loader from "../../services/Loader";
-import Button from '../../services/Button'
+import Button from "../../services/Button";
+
+import "./RecipesCart.scss";
+import noPhoto from "../../assets/img/no_photo.svg";
 
 const RecipesCart = ({ resultOptions }) => {
   const [instruction, setInstruction] = useState({});
@@ -28,26 +31,36 @@ const RecipesCart = ({ resultOptions }) => {
       {instructionLoad ? (
         <Loader />
       ) : (
-        <div>
+        <div className="recipes-cart">
           <div>
             <Button secondary onClick={history.goBack} text={"Назад"}></Button>
           </div>
-          <div>
+          <div className="recipes-cart__name">
             <h1>{instruction.name}</h1>
-            <small>
+            <small className="source">
               Источник: <a href="https://eda.ru/">eda.ru</a>
             </small>
           </div>
-          <div style={{ display: "flex" }}>
-            {instruction.photos.map((item) => (
-              <img height="400px" src={item} alt="" />
-            ))}
+          <div className="recipes-cart__photos">
+            {instruction.photos.length === 0 ? (
+              <div style={{display: "flex", flexDirection: "column"}}>
+                К сожалению фото нет {":("} но вы можете добавить своё!
+                <img style={{ height: "200px", marginBottom: "20px" }} src={noPhoto} alt="" />
+                <Button secondary text="Добавить фото"></Button>
+              </div>
+            ) : (
+              instruction.photos.map((item) => (
+                <div className="recipes-cart__photos-item">
+                  <img height="400px" src={item} alt="" />
+                </div>
+              ))
+            )}
           </div>
-          <div>
+          <div className="recipes-cart__description">
             <p>{instruction.desription}</p>
           </div>
-          <div>
-            Ингредиенты:
+          <div className="recipes-cart__ingredients">
+            <h3>Ингредиенты:</h3>
             <ul>
               {resultOptions.ingredients.map((item) => (
                 <li>
@@ -56,8 +69,8 @@ const RecipesCart = ({ resultOptions }) => {
               ))}
             </ul>
           </div>
-          <div>
-            <div>Способ приготовления:</div>
+          <div className="recipes-cart__steps">
+            <h3>Способ приготовления:</h3>
             <div>
               {instruction.steps.map((step, index) => (
                 <div key={index}>

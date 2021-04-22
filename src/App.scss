@@ -1,3 +1,5 @@
+@import './services/variables.scss';
+
 body {
   margin: 0;
 }
@@ -27,17 +29,17 @@ a {
 
 @media (min-width: 576px) {
   .container {
-    width: 750px;
+    width: $phone-width;
   }
 }
 @media (min-width: 992px) {
   .container {
-    width: 970px;
+    width: $tablet-width;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: $desktop-width;
     flex-direction: row;
   }
 }

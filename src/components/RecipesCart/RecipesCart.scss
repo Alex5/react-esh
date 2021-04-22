@@ -1,0 +1,92 @@
+@import "../../services/variables.scss";
+
+.recipes-cart {
+  font-size: 18px;
+
+  &__name {
+    margin-bottom: 20px;
+
+    h1 {
+      font-family: $base-font;
+      margin-bottom: 0px;
+    }
+  }
+
+  &__photos {
+    display: flex;
+    overflow: auto;
+    padding: 20px;
+    border-radius: $border-radius;
+    background-color: whitesmoke;
+    border: 1px solid rgb(233, 233, 233);
+
+    &::-webkit-scrollbar {
+      height: 15px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: rgb(228, 228, 228);
+      border-radius: $border-radius;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(196, 196, 196);
+      border-radius: $border-radius;
+
+      &:active {
+        background-color: gray;
+      }
+    }
+
+    @media (min-width: $phone-width) {
+      width: $phone-width;
+    }
+
+    @media (min-width: $tablet-width) {
+      width: $tablet-width;
+    }
+
+    @media (min-width: $desktop-width) {
+      width: $desktop-width;
+    }
+
+    &-item img {
+      border-radius: $border-radius;
+      width: 500px;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+  }
+
+  //   &__description p {}
+
+  &__ingredients {
+    padding: 20px;
+    border-radius: $border-radius;
+    background-color: whitesmoke;
+    margin-bottom: 20px;
+    border: 1px solid rgb(233, 233, 233);
+
+    h3 {
+      margin-top: 0;
+      font-family: $base-font;
+    }
+
+    ul {
+      line-height: 30px;
+    }
+  }
+
+  &__steps {
+    padding: 20px;
+    border-radius: $border-radius;
+    background-color: whitesmoke;
+    margin-bottom: 20px;
+    border: 1px solid rgb(233, 233, 233);
+
+    h3 {
+        font-family: $base-font;
+      margin-top: 0;
+    }
+  }
+}
