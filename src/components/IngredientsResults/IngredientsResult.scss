@@ -9,11 +9,23 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 3vw;
 
+  @media (min-width: 320px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 700px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
   &-item {
     display: flex;
     padding: 15px;
     transition: 0.3s;
     color: rgb(46, 46, 46);
+
+    @media (min-width: 320px) {
+      flex-direction: column;
+    }
 
     &:hover {
       padding: 15px;
@@ -25,6 +37,11 @@
     &__img {
       width: 250px;
       height: 200px;
+
+      @media (min-width: 320px) {
+        width: 100%;
+        margin-bottom: 20px;
+      }
 
       img {
         height: 100%;
@@ -51,7 +68,7 @@
 
       &-lists div {
         margin-bottom: 5px;
-      } 
+      }
     }
   }
 }

@@ -46,7 +46,7 @@ const RecipesCart = ({ resultOptions }) => {
               <div style={{display: "flex", flexDirection: "column"}}>
                 К сожалению фото нет {":("} но вы можете добавить своё!
                 <img style={{ height: "200px", marginBottom: "20px" }} src={noPhoto} alt="" />
-                <Button secondary text="Добавить фото"></Button>
+                <Button secondary text="Добавить фото"/>
               </div>
             ) : (
               instruction.photos.map((item) => (

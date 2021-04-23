@@ -17,7 +17,7 @@ function App() {
   const [recipesState, setRecipesState] = React.useState([]);
   const [chipItems, setChipItems] = React.useState([]);
   const [inputIngredients, setInputIngredients] = React.useState("");
-  const [ingrCount, setIngrCount] = React.useState(0.0)
+  const [ingrCount, setIngrCount] = React.useState(0.0);
 
   const onIngrInput = () => {
     if (inputIngredients.length >= 3) {
@@ -39,7 +39,7 @@ function App() {
     let chipItemsArr = new Set([...chipItems]);
     chipItemsArr.add(elem);
     setChipItems([...chipItemsArr]);
-    setInputIngredients('')
+    setInputIngredients("");
   };
 
   const deleteChipItem = (item) => {
