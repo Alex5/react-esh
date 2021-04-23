@@ -13,7 +13,8 @@ const Search = ({
   chipItems,
   loadingIngredients,
   setInputIngredients,
-  inputIngredients
+  inputIngredients,
+  deleteChipItem
 }) => {
 
   return (
@@ -44,6 +45,7 @@ const Search = ({
           <Switch>
             <Route path="/ingredients">
               <SearchIndgredients
+              deleteChipItem={deleteChipItem}
                 filterIngredients={filterIngredients}
                 onIngrInput={onIngrInput}
                 addChipItems={addChipItems}

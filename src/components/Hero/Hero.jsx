@@ -18,7 +18,7 @@ const Hero = ({
     <section className="hero">
       <div className="hero-body">
         {chipItems && chipItems.length !== 0 ? (
-          <div>
+          <div className="hero-result">
             <div className="hero__header">
               <h3>Ингредиенты</h3>
             </div>

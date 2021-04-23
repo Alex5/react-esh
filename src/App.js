@@ -108,6 +108,7 @@ function App() {
                 setInputIngredients={setInputIngredients}
                 inputIngredients={inputIngredients}
                 ingrCount={ingrCount}
+                deleteChipItem={deleteChipItem}
               />
             </div>
             <div className="container__result">

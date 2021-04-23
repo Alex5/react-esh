@@ -1,6 +1,12 @@
 .hero {
   margin-bottom: 20px;
 
+  &-result {
+    @media (max-width: 700px) {
+      display: none;
+    }
+  }
+
   .hero-body {
     height: 550px;
     overflow: auto;
@@ -80,7 +86,11 @@
         font-size: 18px;
         transition: 0.3s;
         height: 50px;
-        max-width: 250px;
+        width: 250px;
+
+        @media (max-width: 700px) {
+          width: 100%;
+        }
 
         a {
           display: flex;

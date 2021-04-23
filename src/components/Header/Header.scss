@@ -1,21 +1,23 @@
 .header {
   display: flex;
-  align-items: center;
+  justify-content: center;
   background: #f3f3f3;
-  padding: 15px;
+  padding: 10px 0 10px 0;
   margin-bottom: 25px;
   box-shadow: 0 3px 6px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(212, 212, 212, 0.23);
 
   &__container {
-   width: 100%;
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    padding: 0 15px 0 15px;
   }
 
   &__logo {
     align-self: center;
   }
 }
+
 
 @media (min-width: 576px) {
   .header__container {
@@ -29,7 +31,7 @@
 }
 @media (min-width: 1200px) {
   .header__container {
-    width: 100%;
+    width: 1170px;
     
   }
 }

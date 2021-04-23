@@ -10,7 +10,8 @@ const SearchIndgredients = ({
   chipItems,
   loadingIngredients,
   setInputIngredients,
-  inputIngredients
+  inputIngredients,
+  deleteChipItem
 }) => {
   return (
     <div className="search-popup">
@@ -31,7 +32,7 @@ const SearchIndgredients = ({
           chipItems.map((item) => (
             <div key={item._id} className="chip">
               <div className="chip__name">{item.name}</div>
-              <div className="chip__delete-btn">
+              <div onClick={() => deleteChipItem(item)} className="chip__delete-btn">
                 <img src={closeChip} alt="" />
               </div>
             </div>
