@@ -16,7 +16,7 @@ const Header = () => {
             <img src={logo} alt="" />
           </div>
           <div className="header__action">
-            <Button icon={userLogin} secondary />
+            <Button secondarySquare icon={userLogin} alt={"Регистрация"}/>
           </div>
         </div>
     </header>
