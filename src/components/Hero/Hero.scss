@@ -62,14 +62,16 @@
             transition: 0.3s;
             font-style: 16px;
 
-            &:first-child {
-              margin-right: 10px;
-            }
 
             &:hover {
               color: black;
               border: 1px solid black;
               cursor: pointer;
+            }
+
+            &.exclude {
+              border-color: tomato;
+              color: tomato;
             }
           }
         }

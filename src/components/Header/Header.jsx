@@ -11,14 +11,14 @@ import "../../App.scss";
 const Header = () => {
   return (
     <header className="header">
-        <div className="header__container">
+        <nav className="header__container">
           <div className="header__logo">
             <img src={logo} alt="" />
           </div>
-          <div className="header__action">
-            <Button secondarySquare icon={userLogin} alt={"Регистрация"}/>
-          </div>
-        </div>
+          {/* <div className="header__action">
+            <Button secondarySquare icon={userLogin} alt={"Регистраци"}/>
+          </div> */}
+        </nav>
     </header>
   );
 };

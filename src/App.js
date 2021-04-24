@@ -18,6 +18,7 @@ function App() {
   const [chipItems, setChipItems] = React.useState([]);
   const [inputIngredients, setInputIngredients] = React.useState("");
   const [ingrCount, setIngrCount] = React.useState(0.0);
+  const [excludeItem, setExcludeItems] = React.useState(false);
 
   const onIngrInput = () => {
     if (inputIngredients.length >= 3) {
@@ -38,6 +39,7 @@ function App() {
   const addChipItems = (elem) => {
     let chipItemsArr = new Set([...chipItems]);
     chipItemsArr.add(elem);
+    elem.exclude = false;
     setChipItems([...chipItemsArr]);
     setInputIngredients("");
   };
@@ -48,9 +50,19 @@ function App() {
     setChipItems([...deletingChipItems]);
   };
 
+  const onExclude = (id) => {
+    chipItems.forEach((element) => {
+      if (id === element._id) {
+        let excludeChipItemsArr = new Set([...chipItems]);
+        excludeChipItemsArr.add(element);
+        setExcludeItems((element.exclude = !excludeItem));
+      }
+    });
+  };
+
   React.useEffect(() => {
     getRecipes();
-  }, [chipItems, ingrCount]);
+  }, [chipItems, ingrCount, excludeItem]);
 
   React.useEffect(() => {
     onIngrInput();
@@ -63,7 +75,7 @@ function App() {
       newChipItems.push({
         id: ingredients._id,
         count: ingrCount,
-        exclude: false,
+        exclude: ingredients.exclude
       });
     });
 
@@ -84,7 +96,9 @@ function App() {
         setLoadingRecipes(false);
       })
       .catch(() => {
-        <Alert />;
+        console.log('Список ингредиентов пуст!');
+        setLoadingRecipes(false);
+        setRecipesState([])
       });
   };
 
@@ -119,6 +133,8 @@ function App() {
                 loadingRecipes={loadingRecipes}
                 ingrCount={ingrCount}
                 setIngrCount={setIngrCount}
+                onExclude={onExclude}
+                excludeItem={excludeItem}
               />
             </div>
           </Route>

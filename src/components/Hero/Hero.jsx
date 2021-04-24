@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import closeChip from "../../assets/img/cancel_black_24dp.svg";
@@ -12,7 +12,9 @@ const Hero = ({
   recipesState,
   loadingRecipes,
   ingrCount,
-  setIngrCount
+  setIngrCount,
+  onExclude,
+  excludeItem,
 }) => {
   return (
     <section className="hero">
@@ -45,10 +47,15 @@ const Hero = ({
                       type="number"
                     />
                   </div> */}
-                  {/* <div className="chip__footer">
-                    <button>изменить</button>
-                    <button>исключить</button>
-                  </div> */}
+                  <div className="chip__footer">
+                    {/* <button>изменить</button> */}
+                      <button
+                        className={item.exclude ? "exclude" : ""}
+                        onClick={() => onExclude(item._id)}
+                      >
+                        исключить
+                      </button>
+                  </div>
                 </div>
               ))}
             </div>
