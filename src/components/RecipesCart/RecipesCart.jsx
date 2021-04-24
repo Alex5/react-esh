@@ -13,16 +13,21 @@ const RecipesCart = ({ resultOptions }) => {
   const [instructionLoad, setInstructionLoad] = useState(true);
 
   let history = useHistory();
+  const numbers = /\d+/;
+  const string = history.location.pathname;
+  let queryId = string.match(numbers);
 
   useEffect(() => {
     axios
       .get(
-        `https://intense-reef-89831.herokuapp.com/getRecipeInstruction/?id=${resultOptions.id}&source=eda.ru`
+        `https://intense-reef-89831.herokuapp.com/getRecipeInstruction/?id=${queryId}&source=eda.ru`
       )
       .then((res) => {
-        console.log(res);
         setInstruction(res.data);
         setInstructionLoad(false);
+      })
+      .catch((ERR) => {
+        alert(ERR);
       });
   }, [resultOptions]);
 
@@ -43,10 +48,14 @@ const RecipesCart = ({ resultOptions }) => {
           </div>
           <div className="recipes-cart__photos">
             {instruction.photos.length === 0 ? (
-              <div style={{display: "flex", flexDirection: "column"}}>
+              <div style={{ display: "flex", flexDirection: "column" }}>
                 К сожалению фото нет {":("} но вы можете добавить своё!
-                <img style={{ height: "200px", marginBottom: "20px" }} src={noPhoto} alt="" />
-                <Button secondary text="Добавить фото"/>
+                <img
+                  style={{ height: "200px", marginBottom: "20px" }}
+                  src={noPhoto}
+                  alt=""
+                />
+                <Button secondary text="Добавить фото" />
               </div>
             ) : (
               instruction.photos.map((item) => (
@@ -62,7 +71,7 @@ const RecipesCart = ({ resultOptions }) => {
           <div className="recipes-cart__ingredients">
             <h3>Ингредиенты:</h3>
             <ul>
-              {resultOptions.ingredients.map((item) => (
+              {instruction.ingredients.map((item) => (
                 <li>
                   {item.name} {item.count} {item.countName}
                 </li>
