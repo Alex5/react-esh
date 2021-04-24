@@ -6,7 +6,6 @@ import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import Search from "./components/Search/Search";
 import IngredientsResult from "./components/IngredientsResults/IngredientsResult";
-import Alert from "./services/Alert";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
