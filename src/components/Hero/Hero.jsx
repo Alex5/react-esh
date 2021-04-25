@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import {setChips} from '../../redux/searchSlice'
 
 import closeChip from "../../assets/img/cancel_black_24dp.svg";
 import Loader from "../../services/Loader";
@@ -7,15 +10,19 @@ import Loader from "../../services/Loader";
 import "./Hero.scss";
 
 const Hero = ({
-  chipItems,
-  deleteChipItem,
   recipesState,
   loadingRecipes,
-  ingrCount,
-  setIngrCount,
   onExclude,
-  excludeItem,
 }) => {
+  const dispatch = useDispatch();
+  const chipItems = useSelector((state) => state.search.chipItems);
+
+  const onDeleteChip = (item) => {
+    let deletingChipItems = new Set([...chipItems]);
+    deletingChipItems.delete(item);
+    dispatch(setChips([...deletingChipItems]));
+  };
+
   return (
     <section className="hero">
       <div className="hero-body">
@@ -30,7 +37,7 @@ const Hero = ({
                   <div className="chip__header">
                     <div className="chip__header_title">{item.name}</div>
                     <button
-                      onClick={() => deleteChipItem(item)}
+                      onClick={() => onDeleteChip(item)}
                       className="chip__header_close-btn"
                     >
                       <img src={closeChip} alt="" />
@@ -49,12 +56,12 @@ const Hero = ({
                   </div> */}
                   <div className="chip__footer">
                     {/* <button>изменить</button> */}
-                      <button
-                        className={item.exclude ? "exclude" : ""}
-                        onClick={() => onExclude(item._id)}
-                      >
-                        исключить
-                      </button>
+                    <button
+                      className={item.exclude ? "exclude" : ""}
+                      onClick={() => onExclude(item._id)}
+                    >
+                      исключить
+                    </button>
                   </div>
                 </div>
               ))}

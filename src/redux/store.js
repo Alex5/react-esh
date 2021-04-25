@@ -1,15 +1,10 @@
-import {combineReducers} from 'redux'
-import {createStore, applyMiddleware, compose} from "redux"
-import searchReducer from './search-reducer';
+import { configureStore } from "@reduxjs/toolkit";
+import searchSlice from "./searchSlice";
 
-let reducers = combineReducers({
-    searchData: searchReducer
-})
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(reducers, composeEnhancers(applyMiddleware()))
+const store = configureStore({
+  reducer: {
+    search: searchSlice,
+  },
+});
 
 export default store;
-
-

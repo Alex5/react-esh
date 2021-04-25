@@ -18,20 +18,6 @@ function App() {
   const [ingrCount, setIngrCount] = React.useState(0.0);
   const [excludeItem, setExcludeItems] = React.useState(false);
 
-  const addChipItems = (elem) => {
-    let chipItemsArr = new Set([...chipItems]);
-    chipItemsArr.add(elem);
-    elem.exclude = false;
-    setChipItems([...chipItemsArr]);
-    setInputIngredients("");
-  };
-
-  const deleteChipItem = (item) => {
-    let deletingChipItems = new Set([...chipItems]);
-    deletingChipItems.delete(item);
-    setChipItems([...deletingChipItems]);
-  };
-
   const onExclude = (id) => {
     chipItems.forEach((element) => {
       if (id === element._id) {
@@ -92,19 +78,16 @@ function App() {
           <Route path="/">
             <div className="container__search">
               <Search
-                addChipItems={addChipItems}
                 chipItems={chipItems}
                 loadingIngredients={loadingIngredients}
                 setInputIngredients={setInputIngredients}
                 inputIngredients={inputIngredients}
                 ingrCount={ingrCount}
-                deleteChipItem={deleteChipItem}
               />
             </div>
             <div className="container__result">
               <Hero
-                chipItems={chipItems}
-                deleteChipItem={deleteChipItem}
+                
                 recipesState={recipesState}
                 loadingRecipes={loadingRecipes}
                 ingrCount={ingrCount}
