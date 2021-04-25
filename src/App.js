@@ -10,7 +10,6 @@ import IngredientsResult from "./components/IngredientsResults/IngredientsResult
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-  const [filterIngredients, setFilterIngredients] = React.useState([]);
   const [loadingIngredients, setLoadingIngredients] = React.useState(null);
   const [loadingRecipes, setLoadingRecipes] = React.useState(null);
   const [recipesState, setRecipesState] = React.useState([]);
@@ -18,22 +17,6 @@ function App() {
   const [inputIngredients, setInputIngredients] = React.useState("");
   const [ingrCount, setIngrCount] = React.useState(0.0);
   const [excludeItem, setExcludeItems] = React.useState(false);
-
-  const onIngrInput = () => {
-    if (inputIngredients.length >= 3) {
-      setLoadingIngredients(true);
-      axios
-        .get(
-          `https://intense-reef-89831.herokuapp.com/getIngredients/?q=${inputIngredients}`
-        )
-        .then((res) => {
-          setFilterIngredients(res.data);
-          setLoadingIngredients(false);
-        });
-    } else {
-      setFilterIngredients([]);
-    }
-  };
 
   const addChipItems = (elem) => {
     let chipItemsArr = new Set([...chipItems]);
@@ -63,10 +46,6 @@ function App() {
     getRecipes();
   }, [chipItems, ingrCount, excludeItem]);
 
-  React.useEffect(() => {
-    onIngrInput();
-  }, [inputIngredients]);
-
   const getRecipes = () => {
     let newChipItems = [];
 
@@ -74,7 +53,7 @@ function App() {
       newChipItems.push({
         id: ingredients._id,
         count: ingrCount,
-        exclude: ingredients.exclude
+        exclude: ingredients.exclude,
       });
     });
 
@@ -95,9 +74,9 @@ function App() {
         setLoadingRecipes(false);
       })
       .catch(() => {
-        console.log('Список ингредиентов пуст!');
+        console.log("Список ингредиентов пуст!");
         setLoadingRecipes(false);
-        setRecipesState([])
+        setRecipesState([]);
       });
   };
 
@@ -113,8 +92,6 @@ function App() {
           <Route path="/">
             <div className="container__search">
               <Search
-                filterIngredients={filterIngredients}
-                onIngrInput={onIngrInput}
                 addChipItems={addChipItems}
                 chipItems={chipItems}
                 loadingIngredients={loadingIngredients}

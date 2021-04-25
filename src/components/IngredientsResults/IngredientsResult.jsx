@@ -1,19 +1,20 @@
-import { React, useState } from "react";
+import React from "react";
+import { Route, Switch, useHistory, Link } from "react-router-dom";
+
 import RecipesCart from "../RecipesCart/RecipesCart";
 import Button from "../../services/Button";
 
 import "./IngredientsResult.scss";
+import notFound from '../../assets/img/404.svg'
 
-import { Route, Switch, useHistory, Link } from "react-router-dom";
 
 const IngredientsResult = ({ recipesState }) => {
   const history = useHistory();
-  const [resultOptions, setResultOptions] = useState(null);
 
   return (
     <Switch>
       <Route path={`/ingredients/result/:id`}>
-        <RecipesCart resultOptions={resultOptions} />
+        <RecipesCart />
       </Route>
       <Route path="/ingredients/result">
         <div className="ingredients-result">
@@ -29,16 +30,13 @@ const IngredientsResult = ({ recipesState }) => {
               <h1>Найдено {recipesState.length} рецептов</h1>
             </div>
           </div>
-          <div className="ingredients-result__body">
-            {recipesState &&
+          <div
+            className={"ingredients-result__body"}
+          >
+            {recipesState.length !== 0 
+            ?
               recipesState.map((item) => (
                 <Link
-                  onClick={() =>
-                    setResultOptions({
-                      id: item._id,
-                      ingredients: item.ingredients,
-                    })
-                  }
                   to={{
                     pathname: `/ingredients/result/${item._id}`,
                     state: { id: item._id, ingredients: item.ingredients },
@@ -74,7 +72,9 @@ const IngredientsResult = ({ recipesState }) => {
                     </div>
                   </div>
                 </Link>
-              ))}
+              ))
+            : <img style={{width: "500px"}} src={notFound} alt=""/>
+            }
           </div>
         </div>
       </Route>

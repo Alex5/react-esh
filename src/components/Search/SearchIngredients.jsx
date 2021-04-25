@@ -1,5 +1,8 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
+import { useDispatch, useSelector } from "react-redux";
+import { setFoundIngredients,setIngrValue } from "../../redux/search-reducer";
+import axios from "axios";
 
 import "./Search.scss";
 import Loader from "../../services/Loader";
@@ -15,7 +18,32 @@ const SearchIndgredients = ({
   inputIngredients,
   deleteChipItem,
 }) => {
-  const searchPopup = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } });
+  const searchPopup = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    config: { duration: 50 },
+  });
+
+  const dispatch = useDispatch();
+  const inputValue = useSelector((state) => state.searchData.inputValue);
+  const foundIngredients = useSelector(
+    (state) => state.searchData.foundIngredients
+  );
+
+  const onIngInput = (value) => {
+    dispatch(setIngrValue(value));
+    if (inputValue.length >= 3) {
+      axios
+        .get(
+          `https://intense-reef-89831.herokuapp.com/getIngredients/?q=${inputValue}`
+        )
+        .then((res) => {
+          dispatch(setFoundIngredients(res.data));
+        });
+    } else {
+      dispatch(setFoundIngredients([]));
+    }
+  };
 
   return (
     <animated.div style={searchPopup} className="search-popup">
@@ -27,9 +55,9 @@ const SearchIndgredients = ({
         <div className="search-popup__input">
           <input
             placeholder="Введите название ингредиента"
-            value={inputIngredients}
+            value={inputValue}
             type="search"
-            onInput={(e) => setInputIngredients(e.target.value)}
+            onInput={(e) => onIngInput(e.target.value)}
           />
         </div>
         <div className="search-popup__chips">
@@ -51,7 +79,7 @@ const SearchIndgredients = ({
             {loadingIngredients ? (
               <Loader />
             ) : (
-              filterIngredients.map((item) => (
+              foundIngredients.map((item) => (
                 <li onClick={() => addChipItems(item)} key={item._id}>
                   {item.name}
                 </li>

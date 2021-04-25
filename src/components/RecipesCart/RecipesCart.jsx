@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 
 import Loader from "../../services/Loader";
@@ -8,19 +8,17 @@ import Button from "../../services/Button";
 import "./RecipesCart.scss";
 import noPhoto from "../../assets/img/no_photo.svg";
 
-const RecipesCart = ({ resultOptions }) => {
+const RecipesCart = () => {
   const [instruction, setInstruction] = useState({});
   const [instructionLoad, setInstructionLoad] = useState(true);
 
   let history = useHistory();
-  const numbers = /\d+/;
-  const string = history.location.pathname;
-  let queryId = string.match(numbers);
+  let { id } = useParams();
 
   useEffect(() => {
     axios
       .get(
-        `https://intense-reef-89831.herokuapp.com/getRecipeInstruction/?id=${queryId}&source=eda.ru`
+        `https://intense-reef-89831.herokuapp.com/getRecipeInstruction/?id=${id}&source=eda.ru`
       )
       .then((res) => {
         setInstruction(res.data);
@@ -29,7 +27,7 @@ const RecipesCart = ({ resultOptions }) => {
       .catch((ERR) => {
         alert(ERR);
       });
-  }, [resultOptions]);
+  }, []);
 
   return (
     <div>

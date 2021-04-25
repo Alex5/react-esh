@@ -39,6 +39,7 @@
     transition: ease-in 0.1s;
     font-weight: bold;
     font-size: 15px;
+    padding-left: 40px;
 
     &:focus {
       border-radius: 10px;
@@ -68,7 +69,7 @@
     .selected {
       background: black;
       color: white;
-      border-radius: 10px;
+      border-radius: 15px;
       height: 100%;
       width: 100%;
       display: flex;
@@ -96,7 +97,6 @@
 
   &__body {
     padding: 25px;
-   
   }
 
   &__header {
@@ -197,7 +197,7 @@
 .hero-header {
   &__title h1 {
     font-family: Gilroy, sans-serif;
-    font-size: 35px;
+    font-size: 3rem;
     text-transform: uppercase;
     margin: 0;
   }

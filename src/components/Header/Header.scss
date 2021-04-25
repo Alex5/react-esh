@@ -1,11 +1,9 @@
 .header {
   display: flex;
   justify-content: center;
-  background: #f3f3f3;
   height: 48px;
   margin-bottom: 25px;
-  box-shadow: 0 3px 6px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(212, 212, 212, 0.23);
-
+  
   &__container {
     display: flex;
     justify-content: space-between;
