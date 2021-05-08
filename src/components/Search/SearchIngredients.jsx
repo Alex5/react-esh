@@ -4,37 +4,43 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   foundIngredient,
   onIngrInput,
-  setChips,
+  setChips
 } from "../../redux/searchSlice";
+
 import { searchAPI } from "../../api/Api";
 
 import "./Search.scss";
 import Loader from "../../services/Loader";
 
-import closeChip from "../../assets/img/cancel_black_24dp.svg";
-
-const SearchIndgredients = ({ loadingIngredients, deleteChipItem }) => {
+const SearchIngredients = ({ }) => {
   const searchPopup = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },
     config: { duration: 30 },
   });
 
+  const [ingLoad, setIngLoad] = React.useState(false)
+
   const dispatch = useDispatch();
-  const inputValue = useSelector((state) => state.search.inputValue);
+
+  const inputValue = useSelector((state) => state.search.inputIngrValue);
   const foundIngredients = useSelector(
     (state) => state.search.foundIngredients
   );
   const chipItems = useSelector((state) => state.search.chipItems);
 
+  const isLoading = useSelector((state) => state.services.isLoading);
+
   const onIngInput = (value) => {
+    setIngLoad(true)
     dispatch(onIngrInput(value));
-    if (inputValue.length >= 3) {
+    if (value.length >= 3) {
       searchAPI
         .getIngredients(inputValue)
-        .then((res) => dispatch(foundIngredient(res.data)));
-    } else {
-      dispatch(foundIngredient([]));
+        .then((res) => { 
+          dispatch(foundIngredient(res.data))
+          setIngLoad(false)
+        });
     }
   };
 
@@ -42,7 +48,10 @@ const SearchIndgredients = ({ loadingIngredients, deleteChipItem }) => {
     let chipItemsArr = new Set([...chipItems]);
     chipItemsArr.add(item);
     dispatch(setChips([...chipItemsArr]));
+    dispatch(onIngrInput(''));
+    dispatch(foundIngredient([]));
   };
+
 
   return (
     <animated.div style={searchPopup} className="search-popup">
@@ -64,18 +73,12 @@ const SearchIndgredients = ({ loadingIngredients, deleteChipItem }) => {
             chipItems.map((item) => (
               <div key={item._id} className="chip">
                 <div className="chip__name">{item.name}</div>
-                {/* <div
-                  onClick={() => onDeleteChip(item)}
-                  className="chip__delete-btn"
-                >
-                  <img src={closeChip} alt="" />
-                </div> */}
               </div>
             ))}
         </div>
         <div className="search-popup__result">
           <ul>
-            {loadingIngredients ? (
+            {ingLoad ? (
               <Loader />
             ) : (
               foundIngredients.map((item) => (
@@ -91,4 +94,4 @@ const SearchIndgredients = ({ loadingIngredients, deleteChipItem }) => {
   );
 };
 
-export default SearchIndgredients;
+export default SearchIngredients;
