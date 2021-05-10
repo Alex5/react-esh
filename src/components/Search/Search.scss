@@ -99,24 +99,7 @@
   transition: 0.3s;
 
   &__body {
-    padding: 25px;
-  }
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-
-    &_title {
-      font-size: 18px;
-      font-weight: 600;
-
-    }
-
-    &_close-btn {
-      background: none;
-      border: none;
-    }
+    padding: 15px;
   }
 
   &__input {

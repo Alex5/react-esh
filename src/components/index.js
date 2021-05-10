@@ -1,0 +1,6 @@
+export {default as Header} from './Header/Header'
+export {default as Result} from './Result/Result'
+export {default as Search} from './Search/Search'
+export {default as FoundResults} from './FoundResults/FoundResults'
+export {default as RecipesCart} from './RecipesCart/RecipesCart'
+export {default as Button} from '../services/Button'

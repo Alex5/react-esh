@@ -1,40 +1,28 @@
-import "./App.scss";
-import React, {useEffect} from "react";
+import React from "react";
+import {Route, Switch} from "react-router-dom";
+import {Header, FoundResults, Result, Search} from "./components/index";
+import {AppContainer, ContainerResult, ContainerSearch} from "./AppStyle";
 
-import Header from "./components/Header/Header";
-import Result from "./components/Result/Result";
-import Search from "./components/Search/Search";
-import IngredientsResult from "./components/IngredientsResults/IngredientsResult";
-
-import {BrowserRouter as Router, Switch, Route, useLocation} from "react-router-dom";
-import GlobalFonts from './assets/fonts/fonts';
-import RecipesCart from "./components/RecipesCart/RecipesCart";
-import {useDispatch} from "react-redux";
-import {setRecipes} from "./redux/searchSlice";
-
-function App() {
-
-
+const App = () => {
     return (
-        <Router>
-            <GlobalFonts/>
+        <>
             <Header/>
-            <div className="container">
+            <AppContainer>
                 <Switch>
-                    <Route path={`/ingredients/result`} component={IngredientsResult}/>
-                    <Route path="/recipes/:id" component={RecipesCart}/>
+                    <Route path={["/recipes/result", "/ingredients/result"]} component={FoundResults}/>
                     <Route path="/">
-                        <div className="container__search">
+                        <ContainerSearch>
                             <Search/>
-                        </div>
-                        <div className="container__result">
+                        </ContainerSearch>
+                        <ContainerResult>
                             <Result/>
-                        </div>
+                        </ContainerResult>
                     </Route>
                 </Switch>
-            </div>
-        </Router>
-    );
-}
+            </AppContainer>
+        </>
+    )
+
+};
 
 export default App;

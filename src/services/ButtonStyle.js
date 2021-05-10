@@ -8,15 +8,15 @@ export const StyledButton = styled.button`
   font-weight: 600;
   transition: 0.3s;
   cursor: pointer;
-  background: #83cc98;
-  font-size: 16px;
-  
+  background: #3a3a3a;
+  font-size: 14px;
+
   a {
     color: white;
     text-decoration: none;
   }
 
   &:hover {
-    background: #71af84;
+    background: #494949;
   }
 `

@@ -6,7 +6,6 @@ import logo from "../../assets/img/esh-logo.svg";
 import userLogin from "../../assets/img/user_login.svg";
 
 import "./Header.scss";
-import "../../App.scss";
 
 const Header = () => {
   return (

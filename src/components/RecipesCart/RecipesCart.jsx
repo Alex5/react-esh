@@ -39,7 +39,6 @@ const RecipesCart = () => {
                 <div className="recipes-cart">
                     <div>{(recipes.length !== 0 ?
                         <Button secondary onClick={history.goBack}>Назад</Button> : <></>)}
-
                     </div>
                     <div className="recipes-cart__name">
                         <h1>{instruction.name}</h1>
@@ -50,13 +49,13 @@ const RecipesCart = () => {
                     <div className="recipes-cart__photos">
                         {instruction.photos.length === 0 ? (
                             <div style={{display: "flex", flexDirection: "column"}}>
-                                К сожалению фото нет {":("} но вы можете добавить своё!
+                                Фото не добавлено
                                 <img
-                                    style={{height: "200px", marginBottom: "20px"}}
+                                    style={{height: "100px", marginBottom: "20px"}}
                                     src={noPhoto}
                                     alt=""
                                 />
-                                <Button secondary text="Добавить фото"/>
+                                {/*<Button secondary text="Добавить фото"/>*/}
                             </div>
                         ) : (
                             instruction.photos.map((item) => (
