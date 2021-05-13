@@ -29,7 +29,7 @@ const RecipesCart = () => {
             .catch((ERR) => {
                 alert(ERR);
             });
-    }, []);
+    }, [id]);
 
     return (
         <div>
@@ -43,7 +43,7 @@ const RecipesCart = () => {
                     <div className="recipes-cart__name">
                         <h1>{instruction.name}</h1>
                         <small className="source">
-                            Источник: <a href="https://eda.ru/" target="_blank">eda.ru</a>
+                            Источник: <a href="https://eda.ru/" target="_blank" rel="noreferrer">eda.ru</a>
                         </small>
                     </div>
                     <div className="recipes-cart__photos">

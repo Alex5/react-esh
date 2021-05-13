@@ -26,3 +26,19 @@ export const ChipHeader = styled.div`
     margin-right: 5px;
   }
 `
+
+export const ChipFooter = styled.div`
+  button {
+    border: none;
+    background: white;
+    border-radius: 5px;
+    color: darkgray;
+    font-weight: 600;
+    padding: 5px;
+
+    &:hover {
+      background: #e5e5e5;
+      color: black;
+    }
+  }
+`
