@@ -55,7 +55,7 @@ const Result = () => {
 
     return (
         <>
-            {chipItems && chipItems.length !== 0
+            {recipes.length || chipItems.length !== 0
                 ? <ResultRoot>
                     <ResultHeader>
                         {location.pathname === '/ingredients' ? 'Ингредиенты' : 'Рецепты'}
