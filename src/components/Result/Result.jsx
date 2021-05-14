@@ -48,51 +48,50 @@ const Result = () => {
             .catch((ERR) => {
                 if (ERR.response.status === 500) {
                     setRecLoad(false);
-                    dispatch(setRecipes([]))
                 }
             });
     };
 
     return (
         <>
-            {chipItems && chipItems.length !== 0
-                ? <ResultRoot>
-                    <ResultHeader>
-                        {location.pathname === '/ingredients' ? 'Ингредиенты' : 'Рецепты'}
-                    </ResultHeader>
-                    <ResultBody>
-                        <Switch>
-                            <Route path="/ingredients/">
-                                {chipItems && chipItems.length !== 0
-                                    ? <AddedChips>
-                                        {chipItems.map((item) => (
-                                            <ChipItem key={item._id} item={item}
-                                                      onDeleteChip={onDeleteChip}
-                                            />
-                                        ))}
-                                    </AddedChips>
-                                    : 'Введите ингредиенты'}
-                            </Route>
-                            <Route path="/recipes/">
-                                <FoundRecipes>
-                                    {recipes.slice(0, 5).map(item => (
-                                        <Link to={`/recipes/result/${item._id}`}>
-                                            <RecipeItem key={item._id} {...item}/>
-                                        </Link>
+            <ResultRoot>
+                <ResultHeader>
+                    {chipItems.length !== 0 && location.pathname === '/ingredients' ? 'Ингредиенты' : ''}
+                    {recipes.length !== 0 && location.pathname === '/recipes' ? 'Рецепты' : ''}
+                </ResultHeader>
+                <ResultBody>
+                    <Switch>
+                        <Route path="/ingredients/">
+                            {chipItems.length !== 0
+                                ? <AddedChips>
+                                    {chipItems.map((item) => (
+                                        <ChipItem key={item._id} item={item}
+                                                  onDeleteChip={onDeleteChip}
+                                        />
                                     ))}
-                                </FoundRecipes>
-                            </Route>
-                        </Switch>
-                    </ResultBody>
-                    <ResultFooter>
+                                </AddedChips>
+                                : <ResultPlaceholder/>}
+                        </Route>
+                        <Route path="/recipes/">
+                            <FoundRecipes>
+                                {recipes.length !== 0 ? recipes.slice(0, 5).map(item => (
+                                    <Link to={`/recipes/result/${item._id}`}>
+                                        <RecipeItem key={item._id} {...item}/>
+                                    </Link>
+                                )) : <ResultPlaceholder/>}
+                            </FoundRecipes>
+                        </Route>
+                    </Switch>
+                </ResultBody>
+                <ResultFooter>
+                    {chipItems.length !== 0 ?
                         <Button>
                             <Link to={`${location.pathname}/result`}>
                                 Найдено {recipesLoad ? <Loader/> : recipes.length} рецепта
                             </Link>
-                        </Button>
-                    </ResultFooter>
-                </ResultRoot>
-                : <ResultPlaceholder/>}
+                        </Button> : <></>}
+                </ResultFooter>
+            </ResultRoot>
         </>
     );
 }

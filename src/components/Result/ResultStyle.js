@@ -15,7 +15,7 @@ export const ResultHeader = styled.div`
 `
 
 export const ResultBody = styled.div`
-  max-height: 500px;
+  max-height: 550px;
   overflow: auto;
 
   ul {
