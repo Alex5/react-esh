@@ -2,18 +2,11 @@ import React from 'react'
 import closeChip from "../../../assets/img/cancel_black_24dp.svg";
 
 import {Chip, ChipFooter, ChipHeader} from './ChipItemStyle'
-import {useDispatch, useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 import {excludeChip} from "../../../redux/searchSlice";
 
 const ChipItem = ({item, onDeleteChip}) => {
     const dispatch = useDispatch()
-    const chipItems = useSelector(state => state.search.chipItems)
-
-    const [excludeItem, setExcludeItem] = React.useState(true)
-
-    const onExclude = () => {
-        dispatch(excludeChip(item.id))
-    };
 
     return (
         <Chip>
@@ -41,7 +34,7 @@ const ChipItem = ({item, onDeleteChip}) => {
                 {/*<button>изменить</button>*/}
                 <button
                     style={{color: item.exclude ? 'red' : ''}}
-                    onClick={() => onExclude()}
+                    onClick={() => dispatch(excludeChip(item.id))}
                 >
                     исключить
                 </button>

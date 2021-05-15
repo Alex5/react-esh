@@ -11,7 +11,8 @@ import {
     FoundRecipes,
     ResultBody,
     ResultFooter,
-    ResultHeader, ResultPlaceholder,
+    ResultHeader, IngredientsPlaceholder,
+    RecipesPlaceholder,
     ResultRoot
 } from "./ResultStyle";
 
@@ -20,24 +21,21 @@ import {RecipeItem, ChipItem} from "./index";
 
 const Result = () => {
     const [recipesLoad, setRecLoad] = React.useState(false);
-
+    const [newRecipes, setNewRecipes] = React.useState([]);
     const dispatch = useDispatch();
     const chipItems = useSelector((state) => state.search.chipItems);
     const recipes = useSelector((state) => state.search.recipes);
     const location = useLocation()
 
     React.useEffect(() => {
-        getRecipes();
+        loadRecipes()
     }, [chipItems]);
 
-    const onDeleteChip = (item) => {
-        let newChipItems = new Set([...chipItems])
-        newChipItems.delete(item)
-        dispatch(setChips([...newChipItems]))
-    };
+    React.useEffect(() => {
+        loadNewRecipes()
+    }, []);
 
-
-    const getRecipes = () => {
+    const loadRecipes = () => {
         setRecLoad(true);
         searchAPI
             .getRecipes(chipItems)
@@ -50,6 +48,45 @@ const Result = () => {
                     setRecLoad(false);
                 }
             });
+    }
+
+    const loadNewRecipes = () => {
+        searchAPI
+            .getRecipes([
+                {
+                    name: 'Шоколад',
+                    id: 14094,
+                    count: 0,
+                    exclude: false
+                },
+                {
+                    name: 'Молоко',
+                    id: 13453,
+                    count: 0,
+                    exclude: false
+                },
+                {
+                    name: 'Пшеничная мука',
+                    id: 13458,
+                    count: 0,
+                    exclude: false
+                }
+                ])
+            .then(({data}) => {
+                setNewRecipes(data.items)
+                setRecLoad(false);
+            })
+            .catch((ERR) => {
+                if (ERR.response.status === 500) {
+                    setRecLoad(false);
+                }
+            });
+    }
+
+    const onDeleteChip = (item) => {
+        let newChipItems = new Set([...chipItems])
+        newChipItems.delete(item)
+        dispatch(setChips([...newChipItems]))
     };
 
     return (
@@ -58,6 +95,7 @@ const Result = () => {
                 <ResultHeader>
                     {chipItems.length !== 0 && location.pathname === '/ingredients' ? 'Ингредиенты' : ''}
                     {recipes.length !== 0 && location.pathname === '/recipes' ? 'Рецепты' : ''}
+                    {location.pathname === '/' ? '#Новое' : ''}
                 </ResultHeader>
                 <ResultBody>
                     <Switch>
@@ -70,21 +108,38 @@ const Result = () => {
                                         />
                                     ))}
                                 </AddedChips>
-                                : <ResultPlaceholder/>}
+                                : <IngredientsPlaceholder/>}
                         </Route>
                         <Route path="/recipes/">
+                            {recipes.length !== 0
+                                ? <FoundRecipes>
+                                    {recipes.slice(0, 5).map(item => (
+                                        <Link to={`/recipes/result/${item._id}`}>
+                                            <RecipeItem key={item._id} {...item}/>
+                                        </Link>
+                                    ))}
+                                </FoundRecipes>
+                                : <RecipesPlaceholder/>}
+                        </Route>
+                        <Route path="/">
                             <FoundRecipes>
-                                {recipes.length !== 0 ? recipes.slice(0, 5).map(item => (
+                                {recipesLoad ? <Loader/> : newRecipes.map(item => (
                                     <Link to={`/recipes/result/${item._id}`}>
                                         <RecipeItem key={item._id} {...item}/>
                                     </Link>
-                                )) : <ResultPlaceholder/>}
+                                ))}
                             </FoundRecipes>
                         </Route>
                     </Switch>
                 </ResultBody>
                 <ResultFooter>
-                    {chipItems.length !== 0 ?
+                    {chipItems.length !== 0 && location.pathname === '/ingredients' ?
+                        <Button>
+                            <Link to={`${location.pathname}/result`}>
+                                Найдено {recipesLoad ? <Loader/> : recipes.length} рецепта
+                            </Link>
+                        </Button> : <></>}
+                    {recipes.length !== 0 && location.pathname === '/recipes' ?
                         <Button>
                             <Link to={`${location.pathname}/result`}>
                                 Найдено {recipesLoad ? <Loader/> : recipes.length} рецепта

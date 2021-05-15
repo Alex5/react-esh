@@ -37,9 +37,9 @@ const RecipesCart = () => {
                 <Loader/>
             ) : (
                 <div className="recipes-cart">
-                    <div>{(recipes.length !== 0 ?
-                        <Button secondary onClick={history.goBack}>Назад</Button> : <></>)}
-                    </div>
+
+                        <Button secondary onClick={history.goBack}>Назад</Button>
+
                     <div className="recipes-cart__name">
                         <h1>{instruction.name}</h1>
                         <small className="source">

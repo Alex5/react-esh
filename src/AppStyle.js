@@ -18,6 +18,7 @@ export const AppContainer = styled.div`
   margin-left: auto;
   font-family: Roboto, sans-serif;
   display: flex;
+  height: 500px;
   flex-direction: column;
   gap: 2vw;
 

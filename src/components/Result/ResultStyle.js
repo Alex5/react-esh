@@ -15,7 +15,7 @@ export const ResultHeader = styled.div`
 `
 
 export const ResultBody = styled.div`
-  max-height: 550px;
+  max-height: 500px;
   overflow: auto;
 
   ul {
@@ -51,11 +51,17 @@ export const FoundRecipes = styled.div`
   }
 `
 
-
-export const ResultPlaceholder = styled.div`
+export const IngredientsPlaceholder = styled.div`
   background-image: url(${coverImage});
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 550px;
+  height: 500px;
+`
+export const RecipesPlaceholder = styled.div`
+  background-image: url(${coverImage});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 500px;
 `

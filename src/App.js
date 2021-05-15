@@ -11,12 +11,8 @@ const App = () => {
                 <Switch>
                     <Route path={["/recipes/result", "/ingredients/result"]} component={FoundResults}/>
                     <Route path="/">
-                        <ContainerSearch>
-                            <Search/>
-                        </ContainerSearch>
-                        <ContainerResult>
-                            <Result/>
-                        </ContainerResult>
+                        <ContainerSearch children={<Search/>} />
+                        <ContainerResult children={<Result/>}/>
                     </Route>
                 </Switch>
             </AppContainer>
