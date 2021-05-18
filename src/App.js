@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-import {Header, FoundResults, Result, Search} from "./components/index";
+import {Header, FoundResults, Result, Search, Home} from "./components/index";
 import {AppContainer, ContainerResult, ContainerSearch} from "./AppStyle";
 
 const App = () => {
@@ -10,10 +10,7 @@ const App = () => {
             <AppContainer>
                 <Switch>
                     <Route path={["/recipes/result", "/ingredients/result"]} component={FoundResults}/>
-                    <Route path="/">
-                        <ContainerSearch children={<Search/>} />
-                        <ContainerResult children={<Result/>}/>
-                    </Route>
+                    <Route path="/" component={Home}/>
                 </Switch>
             </AppContainer>
         </>
@@ -22,3 +19,6 @@ const App = () => {
 };
 
 export default App;
+
+{/*<ContainerSearch children={<Search/>} />*/}
+{/*<ContainerResult children={<Result/>}/>*/}

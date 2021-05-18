@@ -1,0 +1,88 @@
+{
+  "menus": [
+    {
+      "id": 0,
+      "name": "Лента",
+      "path": "/"
+    },
+    {
+      "id": 1,
+      "name": "К чаю",
+      "path": "/k-chayu"
+    },
+    {
+      "id": 2,
+      "name": "На завтрак",
+      "path": "/na-zavtrak"
+    }
+  ],
+  "compilations": [
+    {
+      "id": 0,
+      "name": "Лента",
+      "path": "/",
+      "ingredients": [
+        {
+          "name": "Картофель",
+          "id": 13431,
+          "count": 0,
+          "exclude": false
+        },
+        {
+          "name": "Курица",
+          "id": 13566,
+          "count": 0,
+          "exclude": false
+        }
+      ]
+    },
+    {
+      "name": "К чаю",
+      "path": "/k-chayu",
+      "ingredients": [
+        {
+          "name": "Шоколад",
+          "id": 14094,
+          "count": 0,
+          "exclude": false
+        },
+        {
+          "name": "Молоко",
+          "id": 13453,
+          "count": 0,
+          "exclude": false
+        },
+        {
+          "name": "Пшеничная мука",
+          "id": 13458,
+          "count": 0,
+          "exclude": false
+        }
+      ]
+    },
+    {
+      "name": "На завтрак",
+      "path": "/na-zavtrak",
+      "ingredients": [
+        {
+          "name": "Молоко",
+          "id": 13453,
+          "count": 0,
+          "exclude": false
+        },
+        {
+          "name": "Куриное яйцо",
+          "id": 13418,
+          "count": 0,
+          "exclude": false
+        },
+        {
+          "name": "Бекон",
+          "id": 13464,
+          "count": 0,
+          "exclude": false
+        }
+      ]
+    }
+  ]
+}

@@ -21,7 +21,6 @@ import {RecipeItem, ChipItem} from "./index";
 
 const Result = () => {
     const [recipesLoad, setRecLoad] = React.useState(false);
-    const [newRecipes, setNewRecipes] = React.useState([]);
     const dispatch = useDispatch();
     const chipItems = useSelector((state) => state.search.chipItems);
     const recipes = useSelector((state) => state.search.recipes);
@@ -31,49 +30,12 @@ const Result = () => {
         loadRecipes()
     }, [chipItems]);
 
-    React.useEffect(() => {
-        loadNewRecipes()
-    }, []);
-
     const loadRecipes = () => {
         setRecLoad(true);
         searchAPI
             .getRecipes(chipItems)
             .then(({data}) => {
                 dispatch(setRecipes(data.items));
-                setRecLoad(false);
-            })
-            .catch((ERR) => {
-                if (ERR.response.status === 500) {
-                    setRecLoad(false);
-                }
-            });
-    }
-
-    const loadNewRecipes = () => {
-        searchAPI
-            .getRecipes([
-                {
-                    name: 'Шоколад',
-                    id: 14094,
-                    count: 0,
-                    exclude: false
-                },
-                {
-                    name: 'Молоко',
-                    id: 13453,
-                    count: 0,
-                    exclude: false
-                },
-                {
-                    name: 'Пшеничная мука',
-                    id: 13458,
-                    count: 0,
-                    exclude: false
-                }
-                ])
-            .then(({data}) => {
-                setNewRecipes(data.items)
                 setRecLoad(false);
             })
             .catch((ERR) => {
@@ -121,15 +83,7 @@ const Result = () => {
                                 </FoundRecipes>
                                 : <RecipesPlaceholder/>}
                         </Route>
-                        <Route path="/">
-                            <FoundRecipes>
-                                {recipesLoad ? <Loader/> : newRecipes.map(item => (
-                                    <Link to={`/recipes/result/${item._id}`}>
-                                        <RecipeItem key={item._id} {...item}/>
-                                    </Link>
-                                ))}
-                            </FoundRecipes>
-                        </Route>
+
                     </Switch>
                 </ResultBody>
                 <ResultFooter>

@@ -8,6 +8,7 @@ const desktopWidth = '1170px'
 export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
+    overflow: ${props => props.scrollHide ? 'hidden' : ''};
   }
 `
 
@@ -17,10 +18,6 @@ export const AppContainer = styled.div`
   margin-right: auto;
   margin-left: auto;
   font-family: Roboto, sans-serif;
-  display: flex;
-  height: 500px;
-  flex-direction: column;
-  gap: 2vw;
 
   @media (min-width: 576px) {
     width: ${phoneWidth};

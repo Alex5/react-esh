@@ -7,12 +7,10 @@ import Button from "../../services/Button";
 
 import "./RecipesCart.scss";
 import noPhoto from "../../assets/img/no_photo.svg";
-import {useSelector} from "react-redux";
 
 const RecipesCart = () => {
     const [instruction, setInstruction] = useState({});
     const [instructionLoad, setInstructionLoad] = useState(true);
-    const recipes = useSelector((state) => state.search.recipes);
 
     let history = useHistory();
     let {id} = useParams();
