@@ -7,11 +7,11 @@ export const StyledMain = styled.main`
 `
 
 export const HomeWrapper = styled.div`
- 
+
 `
 
 export const SideBar = styled.div`
-  
+
   width: calc(50vw - 328px);
   min-width: 240px;
 
@@ -44,7 +44,7 @@ export const SideBar = styled.div`
 `
 export const Content = styled.div`
   height: 0;
-  min-height: 650px;
+  min-height: ${({browserHeight}) => browserHeight ? browserHeight - 70 + "px" : 650 + "px"};
   overflow: auto;
   z-index: 2;
   padding-left: 30px;
@@ -58,7 +58,7 @@ export const ContentTitle = styled.span`
 export const ContentBody = styled.div`
   display: grid;
   grid-template-columns: 542px 364px;
-  
+
   a {
     color: black;
     text-decoration: none;

@@ -2,12 +2,13 @@ import {
     RecipesItem,
     RecipesItemImage,
     RecipesItemInfo,
-    RecipesItemInfoBody, RecipesItemInfoFooter,
+    RecipesItemInfoBody,
     RecipesItemInfoHeader
 } from "./RecimeItemStyle";
 
-const RecipeItem = ({recipeCover, name, recipeTime, portionsCount, ingredients}) => {
+const RecipeItem = ({recipeCover, name, recipeTime, portionsCount}) => {
     return (
+
         <RecipesItem>
             <RecipesItemImage>
                 <img src={recipeCover} alt={name}/>
@@ -20,11 +21,11 @@ const RecipeItem = ({recipeCover, name, recipeTime, portionsCount, ingredients})
                     <span>Время приготовления <b>{recipeTime}</b></span>
                     <span>Порций <b>{portionsCount}</b></span>
                 </RecipesItemInfoBody>
-                <RecipesItemInfoFooter>
-                    {ingredients.map(el => (
-                        <span>{el.name} </span>
-                    ))}
-                </RecipesItemInfoFooter>
+                {/*<RecipesItemInfoFooter>*/}
+                {/*    {ingredients.map(el => (*/}
+                {/*        <span>{el.name} </span>*/}
+                {/*    ))}*/}
+                {/*</RecipesItemInfoFooter>*/}
             </RecipesItemInfo>
         </RecipesItem>
     )

@@ -1,7 +1,7 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-import {Header, FoundResults, Result, Search, Home} from "./components/index";
-import {AppContainer, ContainerResult, ContainerSearch} from "./AppStyle";
+import {Header, FoundResults,Home} from "./components/index";
+import {AppContainer} from "./AppStyle";
 
 const App = () => {
     return (

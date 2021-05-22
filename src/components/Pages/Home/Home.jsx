@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {NavLink, Route, useLocation} from "react-router-dom";
 import {searchAPI} from "../../../api/Api";
 
@@ -15,8 +15,6 @@ const Home = () => {
     const [compilationIngredients, setCompilationIngredients] = useState([]);
     const [recipesLoad, setRecLoad] = useState(false);
     const location = useLocation()
-    let contentItemHeight = useRef()
-    console.log(contentItemHeight.current)
 
     useEffect(() => {
         setRecLoad(true);
@@ -60,7 +58,7 @@ const Home = () => {
                 </ul>
             </SideBar>
             <HomeWrapper>
-                <Content>
+                <Content browserHeight={document.body.clientHeight}>
                     <Route path={location.pathname}>
                         <ContentTitle>{title}</ContentTitle>
                         <ContentBody>

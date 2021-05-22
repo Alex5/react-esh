@@ -39,24 +39,6 @@ const SearchIngredients = () => {
         }
     };
 
-    const onAddChip = (item) => {
-
-        let newChipItems = new Set([...chipItems])
-        const newItem = {
-            name: item.name,
-            id: item._id,
-            count: 0.0,
-            exclude: false,
-        }
-
-        newChipItems.add(newItem)
-
-        dispatch(setChips([...newChipItems]))
-        dispatch(onIngrInput(''));
-        dispatch(foundIngredient([]));
-    };
-
-
     return (
         <SearchWrapper>
             <SearchBlock>

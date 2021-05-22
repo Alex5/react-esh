@@ -7,7 +7,10 @@ const searchSlice = createSlice({
         inputRecipeValue: '',
         foundIngredients: [],
         chipItems: [],
-        recipes: [],
+        recipes: {
+            items: [],
+            total: 0
+        },
     },
     reducers: {
         onIngrInput(state, action) {

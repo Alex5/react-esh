@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export const RecipesItem = styled.div`
   display: flex;
-  padding: 15px;
+  padding: 10px;
   border-radius: 15px;
   transition: 0.3s;
+  z-index: 20;
   
   &:hover {
     background: whitesmoke;
@@ -16,21 +17,22 @@ export const RecipesItemImage = styled.div`
 
   img {
     object-fit: cover;
-    height: 150px;
-    width: 150px;
+    height: 100px;
+    width: 100px;
     border-radius: 15px;
   }
 `
 export const RecipesItemInfo = styled.div`
   display: flex;
   flex-direction: column;
+  font-size: 14px;
 `
 
 export const RecipesItemInfoHeader = styled.div`
   margin-bottom: 15px;
 
   span {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600;
   }
 `

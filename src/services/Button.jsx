@@ -12,6 +12,7 @@ const Button = ({children, onClick, secondary, icon, secondarySquare, alt}) => {
       cursor: pointer;
       background: #3a3a3a;
       font-size: 14px;
+      white-space: nowrap;
 
       a {
         color: white;

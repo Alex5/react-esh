@@ -81,7 +81,7 @@ const RecipesCart = () => {
                         <div>
                             {instruction.steps.map((step, index) => (
                                 <div key={index}>
-                                    <strong>{index}.</strong>
+                                    <strong>{index + 1}.</strong>
                                     <p>{step}</p>
                                 </div>
                             ))}

@@ -26,8 +26,8 @@ const FoundResults = () => {
                         <h1>Найдено {recipes.length} рецептов</h1>
                     </FoundResultHeader>
                     <FoundResultBody>
-                        {recipes.length !== 0 ? (
-                            recipes.map((item) => (
+                        {recipes.total !== 0 ? (
+                            recipes.items.map((item) => (
                                 <FoundItem item={item}/>
                             ))
                         ) : (

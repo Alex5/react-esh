@@ -1,11 +1,12 @@
 .header {
   display: flex;
   justify-content: center;
-  height: 72px;
+  margin-bottom: 30px;
+  height: 70px;
+  align-items: center;
   
   &__container {
     display: flex;
-    justify-content: space-between;
     width: 100%;
     padding: 0 15px 0 15px;
   }
@@ -21,19 +22,4 @@
 }
 
 
-@media (min-width: 576px) {
-  .header__container {
-    width: 750px;
-  }
-}
-@media (min-width: 992px) {
-  .header__container {
-    width: 970px;
-  }
-}
-@media (min-width: 1200px) {
-  .header__container {
-    width: 1170px;
-    
-  }
-}
+

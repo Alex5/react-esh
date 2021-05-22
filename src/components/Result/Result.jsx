@@ -11,8 +11,6 @@ import {
     FoundRecipes,
     ResultBody,
     ResultFooter,
-    ResultHeader, IngredientsPlaceholder,
-    RecipesPlaceholder,
     ResultRoot
 } from "./ResultStyle";
 
@@ -52,56 +50,45 @@ const Result = () => {
     };
 
     return (
-        <>
-            <ResultRoot>
-                <ResultHeader>
-                    {chipItems.length !== 0 && location.pathname === '/ingredients' ? 'Ингредиенты' : ''}
-                    {recipes.length !== 0 && location.pathname === '/recipes' ? 'Рецепты' : ''}
-                    {location.pathname === '/' ? '#Новое' : ''}
-                </ResultHeader>
-                <ResultBody>
-                    <Switch>
-                        <Route path="/ingredients/">
-                            {chipItems.length !== 0
-                                ? <AddedChips>
-                                    {chipItems.map((item) => (
-                                        <ChipItem key={item._id} item={item}
-                                                  onDeleteChip={onDeleteChip}
-                                        />
-                                    ))}
-                                </AddedChips>
-                                : <IngredientsPlaceholder/>}
-                        </Route>
-                        <Route path="/recipes/">
-                            {recipes.length !== 0
-                                ? <FoundRecipes>
-                                    {recipes.slice(0, 5).map(item => (
-                                        <Link to={`/recipes/result/${item._id}`}>
-                                            <RecipeItem key={item._id} {...item}/>
-                                        </Link>
-                                    ))}
-                                </FoundRecipes>
-                                : <RecipesPlaceholder/>}
-                        </Route>
+        <ResultRoot>
+            <ResultBody>
+                <Switch>
+                    <Route path="/ingredients/">
+                        {chipItems.length !== 0
+                            ? <AddedChips>
+                                {chipItems.map((item) => (
+                                    <ChipItem key={item._id} item={item}
+                                              onDeleteChip={onDeleteChip}
+                                    />
+                                ))}
+                            </AddedChips>
+                            : <></>}
+                    </Route>
+                    <Route path="/recipes/">
+                        {recipes.length !== 0
+                            ? <FoundRecipes>
+                               ы
+                            </FoundRecipes>
+                            : <></>}
+                    </Route>
 
-                    </Switch>
-                </ResultBody>
-                <ResultFooter>
-                    {chipItems.length !== 0 && location.pathname === '/ingredients' ?
-                        <Button>
-                            <Link to={`${location.pathname}/result`}>
-                                Найдено {recipesLoad ? <Loader/> : recipes.length} рецепта
-                            </Link>
-                        </Button> : <></>}
-                    {recipes.length !== 0 && location.pathname === '/recipes' ?
-                        <Button>
-                            <Link to={`${location.pathname}/result`}>
-                                Найдено {recipesLoad ? <Loader/> : recipes.length} рецепта
-                            </Link>
-                        </Button> : <></>}
-                </ResultFooter>
-            </ResultRoot>
-        </>
+                </Switch>
+            </ResultBody>
+            <ResultFooter>
+                {chipItems.length !== 0 && location.pathname === '/ingredients' ?
+                    <Button>
+                        <Link to={`${location.pathname}/result`}>
+                            Найдено {recipesLoad ? <Loader/> : recipes.length} рецепта
+                        </Link>
+                    </Button> : <></>}
+                {recipes.length !== 0 && location.pathname === '/recipes' ?
+                    <Button>
+                        <Link to={`${location.pathname}/result`}>
+                            Найдено {recipesLoad ? <Loader/> : recipes.length} рецепта
+                        </Link>
+                    </Button> : <></>}
+            </ResultFooter>
+        </ResultRoot>
     );
 }
 
