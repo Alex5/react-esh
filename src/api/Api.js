@@ -30,7 +30,7 @@ export const searchAPI = {
         })
     },
     getRecipesOnInput(value) {
-        return instance.get(`getRecipes/?q=${value}&count=5&offset=1`).then(res => {
+        return instance.get(`getRecipes/?q=${value}&count=10&offset=1`).then(res => {
             setUUID(res);
             return res;
         })

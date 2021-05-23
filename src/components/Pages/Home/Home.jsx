@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
-import {NavLink, Route, useLocation, useParams} from "react-router-dom";
+import {NavLink, Route} from "react-router-dom";
 import {searchAPI} from "../../../api/Api";
 
-import {Content, ContentBody, ContentTitle, HomeWrapper, SideBar, StyledMain} from "./HomeStyle";
+import {Content, ContentBody, HomeWrapper, SideBar, StyledMain} from "./HomeStyle";
 import Loader from "../../../services/Loader";
 import {ContentItem} from "../index";
 import {GlobalStyle} from "../../../AppStyle";
@@ -11,7 +11,6 @@ const Home = () => {
     const [newRecipes, setNewRecipes] = useState([]);
     const [compilationNames, setCompilationNames] = useState([]);
     const [recipesLoad, setRecLoad] = useState(false);
-    const location = useLocation()
 
     useEffect(() => {
         setRecLoad(true);
@@ -22,6 +21,7 @@ const Home = () => {
     }, [])
 
     const getNewRecipes = (linkId) => {
+        setRecLoad(true);
         searchAPI.getActual('-180', linkId).then((res) => {
             setNewRecipes(res.data)
             setRecLoad(false)
@@ -50,7 +50,6 @@ const Home = () => {
             <HomeWrapper>
                 <Content>
                     <Route path={[`/actual`, `/`]}>
-                        {/*<ContentTitle>{location.pathname.replace('/','')}</ContentTitle>*/}
                         <ContentBody>
                             {recipesLoad ? <Loader/> : newRecipes[0]?.items.map(item =>
                                 <ContentItem key={item.id} {...item}/>

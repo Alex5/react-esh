@@ -42,8 +42,7 @@ export const SideBar = styled.div`
   }
 `
 export const Content = styled.div`
-  height: 0;
-  min-height: 600px;
+  height: calc(100vh - 100px);
   overflow: auto;
   z-index: 2;
   padding-left: 30px;
@@ -54,6 +53,7 @@ export const ContentTitle = styled.span`
   font-size: 24px;
   font-family: 'TT Norms Medium', sans-serif;
 `
+
 export const ContentBody = styled.div`
   display: grid;
   grid-template-columns: 542px 364px;

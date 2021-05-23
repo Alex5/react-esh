@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {setChips, setRecipes, onIngrInput, foundIngredient} from "../../redux/searchSlice";
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
-import {Button, ChipItem, SearchPopup} from "../index";
+import {Button, ChipItem, RecipeItem, SearchPopup} from "../index";
 import {searchAPI} from "../../api/Api";
 
 import searchIcon from '../../assets/img/search.svg'
@@ -15,28 +15,27 @@ import {
     StyledResult,
     StyledResultHeader
 } from "./SearchStyle";
-
-import {RecipeItem} from "../Result";
 import {setActivePopup} from "../../redux/servicesSlice";
 
 const Search = () => {
     const [load, onLoad] = React.useState(false)
-    const [recipesFromIng, setRecipesFromIng] = React.useState([])
+    const [recipesFromIng, setRecipesFromIng] = React.useState({items: [], total: 0})
     const inputValue = useSelector((state) => state.search.inputIngrValue);
     const activePopup = useSelector((state) => state.services.activePopup);
     const dispatch = useDispatch();
     const chipItems = useSelector((state) => state.search.chipItems);
-    const recipes = useSelector((state) => state.search.recipes);
     const foundIngredients = useSelector(
         (state) => state.search.foundIngredients
     );
 
     useEffect(() => {
-        searchAPI.getRecipes(chipItems)
-            .then(res => {
-                setRecipesFromIng(res.data)
-                onLoad(false)
-            })
+        if (chipItems.length !== 0) {
+            searchAPI.getRecipes(chipItems)
+                .then(res => {
+                    setRecipesFromIng(res.data)
+                    onLoad(false)
+                })
+        }
     }, [chipItems])
 
     const onIngInput = (value) => {
@@ -45,7 +44,7 @@ const Search = () => {
         if (value.length >= 3) {
             searchAPI.getIngAndRecipes(value).then((res) => {
                 dispatch(foundIngredient(res[0].data))
-                dispatch(setRecipes(res[1].data))
+                setRecipesFromIng(res[1].data)
                 onLoad(false)
             })
         }
@@ -88,8 +87,8 @@ const Search = () => {
                         </StyledIngredients>
                         <StyledResult chipItems={chipItems}>
                             <StyledResultHeader>
-                                <h3>{chipItems.length > 0 ? 'Добавленные' : 'Рецепты'}</h3>
-                                {chipItems.length > 0
+                                <h3>{chipItems?.length > 0 ? 'Добавленные' : 'Рецепты'}</h3>
+                                {chipItems?.length > 0
                                     ? <Button onClick={async () => {
                                         await dispatch(setChips([]))
                                         await dispatch(onIngrInput(''))
@@ -98,8 +97,12 @@ const Search = () => {
                                     : <></>}
                             </StyledResultHeader>
                             <ul>
-                                {chipItems.length === 0
-                                    ? recipes.items.map((item) => (
+                                {chipItems.length !== 0
+                                    ? chipItems.map(chip =>
+                                        <li>
+                                            <ChipItem chip={chip}/>
+                                        </li>)
+                                    : recipesFromIng?.items.slice(0, 10).map((item) => (
                                         <li key={item._id} onClick={() => {
                                             dispatch(setActivePopup(false))
                                             dispatch(onIngrInput(''));
@@ -109,10 +112,6 @@ const Search = () => {
                                             </Link>
                                         </li>
                                     ))
-                                    : chipItems.map(chip =>
-                                        <li>
-                                            <ChipItem chip={chip}/>
-                                        </li>)
                                 }
                             </ul>
                             {chipItems.length > 0
@@ -121,12 +120,12 @@ const Search = () => {
                                     dispatch(setActivePopup(false))
                                 }}>
                                     <Link to={`/recipes/result`}>
-                                        Показать все рецепты
+                                        Найдено {recipesFromIng.items.length} рецепта
                                     </Link>
                                 </Button>
                                 : <Button onClick={() => dispatch(setActivePopup(false))}>
                                     <Link to={`/recipes/result`}>
-                                        Найдено {recipes.total} рецепта
+                                        Найдено {recipesFromIng.total} рецепта
                                     </Link>
                                 </Button>
                             }
