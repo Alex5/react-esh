@@ -32,9 +32,12 @@ const Search = () => {
     );
 
     useEffect(() => {
-        searchAPI.getRecipes(chipItems).then(res => {
-            setFoundRecipes(res.data)
-        })
+        onLoad(true)
+        searchAPI.getRecipes(chipItems)
+            .then(res => {
+                setFoundRecipes(res.data)
+                onLoad(false)
+            })
     }, [chipItems])
 
     console.log(foundRecipes)
@@ -117,13 +120,13 @@ const Search = () => {
                                         </li>)
                                 }
                             </ul>
-                            {chipItems.length > 0 ?
-                                <Button onClick={() => {
+                            {chipItems.length > 0
+                                ? <Button onClick={() => {
                                     dispatch(setRecipes(foundRecipes))
                                     dispatch(setActivePopup(false))
                                 }}>
                                     <Link to={`/recipes/result`}>
-                                        Найдено {foundRecipes ? foundRecipes.items.length : <Loader/>} рецепта
+                                        Найдено {load ? <Loader/> : foundRecipes.items.length} рецепта
                                     </Link>
                                 </Button>
                                 : <Button onClick={() => dispatch(setActivePopup(false))}>
