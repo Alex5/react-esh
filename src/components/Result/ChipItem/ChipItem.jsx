@@ -13,10 +13,6 @@ const ChipItem = ({chip}) => {
         let newChipItems = new Set([...chipItems])
         newChipItems.delete(chipItem)
         dispatch(setChips([...newChipItems]))
-
-        if (chipItems.length === 0) {
-            dispatch(setRecipes([]))
-        }
     };
 
     return (

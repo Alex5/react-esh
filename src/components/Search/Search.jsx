@@ -21,7 +21,7 @@ import {setActivePopup} from "../../redux/servicesSlice";
 
 const Search = () => {
     const [load, onLoad] = React.useState(false)
-    const [foundRecipes, setFoundRecipes] = React.useState([])
+    const [recipesFromIng, setRecipesFromIng] = React.useState([])
     const inputValue = useSelector((state) => state.search.inputIngrValue);
     const activePopup = useSelector((state) => state.services.activePopup);
     const dispatch = useDispatch();
@@ -34,11 +34,10 @@ const Search = () => {
     useEffect(() => {
         searchAPI.getRecipes(chipItems)
             .then(res => {
-                setFoundRecipes(res.data)
+                setRecipesFromIng(res.data)
+                onLoad(false)
             })
     }, [chipItems])
-
-    console.log(foundRecipes)
 
     const onIngInput = (value) => {
         onLoad(true)
@@ -99,17 +98,15 @@ const Search = () => {
                                     : <></>}
                             </StyledResultHeader>
                             <ul>
-                                {chipItems?.length === 0
+                                {chipItems.length === 0
                                     ? recipes.items.map((item) => (
                                         <li key={item._id} onClick={() => {
                                             dispatch(setActivePopup(false))
                                             dispatch(onIngrInput(''));
                                         }}>
-                                            {recipes.items.map(item => (
-                                                <Link to={`/recipes/result/${item._id}`}>
-                                                    <RecipeItem key={item._id} {...item}/>
-                                                </Link>
-                                            ))}
+                                            <Link to={`/recipes/result/${item._id}`}>
+                                                <RecipeItem key={item._id} {...item}/>
+                                            </Link>
                                         </li>
                                     ))
                                     : chipItems.map(chip =>
@@ -120,11 +117,11 @@ const Search = () => {
                             </ul>
                             {chipItems.length > 0
                                 ? <Button onClick={() => {
-                                    dispatch(setRecipes(foundRecipes))
+                                    dispatch(setRecipes(recipesFromIng))
                                     dispatch(setActivePopup(false))
                                 }}>
                                     <Link to={`/recipes/result`}>
-                                        Найдено {foundRecipes.items.length} рецепта
+                                        Показать все рецепты
                                     </Link>
                                 </Button>
                                 : <Button onClick={() => dispatch(setActivePopup(false))}>
