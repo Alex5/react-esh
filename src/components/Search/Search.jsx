@@ -118,9 +118,12 @@ const Search = () => {
                                 }
                             </ul>
                             {chipItems.length > 0 ?
-                                <Button onClick={() => dispatch(setRecipes(foundRecipes))}>
+                                <Button onClick={() => {
+                                    dispatch(setRecipes(foundRecipes))
+                                    dispatch(setActivePopup(false))
+                                }}>
                                     <Link to={`/recipes/result`}>
-                                        Найдено {foundRecipes ? foundRecipes.items.length : <Loader/> } рецепта
+                                        Найдено {foundRecipes ? foundRecipes.items.length : <Loader/>} рецепта
                                     </Link>
                                 </Button>
                                 : <Button onClick={() => dispatch(setActivePopup(false))}>
