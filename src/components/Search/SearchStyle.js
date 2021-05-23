@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import closeBlack from '../../assets/img/close_black_24dp.svg'
 
 export const StyledSearch = styled.div`
   display: flex;
@@ -31,6 +32,22 @@ export const StyledInput = styled.div`
     z-index: 10;
     position: absolute;
     left: 15px;
+  }
+
+  .close-button {
+    display: ${props => props.inputValue !== 0 ? "block" : 'none'};
+    z-index: 10;
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    border: none;
+    font-weight: 600;
+    color: gray;
+    right: 15px;
+    background-color: unset;
+    background-image: url(${closeBlack});
+    
+    background-repeat: no-repeat;
   }
 `
 
@@ -88,7 +105,7 @@ export const StyledResult = styled.div`
     grid-template-columns: ${props => props.chipItems.length > 0 ? '1fr 1fr 1fr' : '1fr'};
     grid-gap: 15px;
     padding: 0;
-    max-height: 500px;
+    max-height: calc(100vh - 250px);
     overflow: auto;
     list-style: none;
   }

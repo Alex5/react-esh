@@ -66,14 +66,20 @@ const Search = () => {
 
     return (
         <StyledSearch>
-            <StyledInput activePopup={activePopup}>
+            <StyledInput inputValue={inputValue.length} activePopup={activePopup}>
                 {load ? <Loader/> : <img className={"search-icon"} src={searchIcon} alt="search"/>}
                 <input onInput={(e) => onIngInput(e.target.value)}
                        onFocus={() => dispatch(setActivePopup(true))}
                        value={inputValue}
                        placeholder={"Ингредиенты, рецепты"}
                        type="text"/>
-                {activePopup
+                <button onClick={() => {
+                    setRecipesFromIng({items: [], total: 0})
+                    dispatch(foundIngredient([]))
+                    dispatch(onIngrInput(''))
+                }} className={"close-button"}>
+                </button>
+                {recipesFromIng.items.length !== 0
                     ? <StyledDropDown activePopup={activePopup}>
                         <StyledIngredients>
                             <h3>Ингредиенты</h3>

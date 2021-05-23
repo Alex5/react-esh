@@ -65,12 +65,6 @@ export const Content = styled.div`
     }
   }
 `
-export const ContentTitle = styled.span`
-  display: block;
-  padding-bottom: 16px;
-  font-size: 24px;
-  font-family: 'TT Norms Medium', sans-serif;
-`
 
 export const ContentBody = styled.div`
   display: grid;
