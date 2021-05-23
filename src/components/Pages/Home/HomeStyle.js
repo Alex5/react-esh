@@ -46,6 +46,24 @@ export const Content = styled.div`
   overflow: auto;
   z-index: 2;
   padding-left: 30px;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #eeeeee;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #d0d0d0;
+    border-radius: 5px;
+
+    &:active {
+      background: #a8a8a8;
+    }
+  }
 `
 export const ContentTitle = styled.span`
   display: block;
