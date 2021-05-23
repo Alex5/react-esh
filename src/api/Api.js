@@ -37,11 +37,18 @@ export const searchAPI = {
     },
     getIngAndRecipes(value) {
         return Promise.all([this.getIngredients(value), this.getRecipesOnInput(value)])
-            .then( (results) => {
-                setUUID(results);
+            .then((results) => {
+                setUUID(results[0]);
                 return [results[0], results[1]]
             });
+    },
+    getActualLabels(timezone) {
+        return instance.get(`getActualLabels?zone=${timezone}`)
+    },
+    getActual(timezone, id) {
+        return instance.get(`getActual?zone=${timezone}&id=${id}`)
     }
 };
+
 
 

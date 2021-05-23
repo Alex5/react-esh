@@ -1,26 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = ({children, onClick, secondary, icon, secondarySquare, alt}) => {
+const Button = ({children, onClick, outline,small, icon, alt}) => {
     const StyledButton = styled.button`
-      padding: 15px;
-      border: 1px solid transparent;
-      border-radius: 13px;
-      color: white;
+      padding: ${small ? '10px' : '15px'};
+      border: 2px solid transparent;
+      border-radius: 10px;
+      color: ${outline ? 'gray' : 'white'};
       font-weight: 600;
       transition: 0.3s;
       cursor: pointer;
-      background: #3a3a3a;
+      background: ${outline ? 'none' : '#3a3a3a'};
       font-size: 14px;
       white-space: nowrap;
+      border: ${outline ? '2px solid gray' : ''};
 
       a {
         color: white;
         text-decoration: none;
-      }
-
-      &:hover {
-        background: #494949;
       }
     `
 

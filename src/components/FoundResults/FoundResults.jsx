@@ -23,7 +23,7 @@ const FoundResults = () => {
                     <FoundResultHeader>
                         <Button
                             onClick={history.goBack}>{location.pathname === '/recipes/result' ? 'Назад к поиску' : 'Изменить ингредиенты'}</Button>
-                        <h1>Найдено {recipes.length} рецептов</h1>
+                        <h1>Найдено {recipes.total} рецептов</h1>
                     </FoundResultHeader>
                     <FoundResultBody>
                         {recipes.total !== 0 ? (

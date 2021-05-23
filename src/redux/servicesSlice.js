@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  isLoading: false,
-  activePopup: false
-};
-
 const servicesSlice = createSlice({
   name: "services",
-  initialState,
+  initialState: {
+    isLoading: false,
+    activePopup: false
+  },
   reducers: {
     setIsLoading(state, action) {
       state.isLoading = action.payload;

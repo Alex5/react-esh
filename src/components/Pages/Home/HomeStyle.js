@@ -11,7 +11,6 @@ export const HomeWrapper = styled.div`
 `
 
 export const SideBar = styled.div`
-
   width: calc(50vw - 328px);
   min-width: 240px;
 
@@ -44,7 +43,7 @@ export const SideBar = styled.div`
 `
 export const Content = styled.div`
   height: 0;
-  min-height: ${({browserHeight}) => browserHeight ? browserHeight - 70 + "px" : 650 + "px"};
+  min-height: 600px;
   overflow: auto;
   z-index: 2;
   padding-left: 30px;

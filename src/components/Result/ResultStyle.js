@@ -14,20 +14,6 @@ export const ResultHeader = styled.div`
   font-family: 'TT Norms Medium', sans-serif;
 `
 
-export const ResultBody = styled.div`
-  max-height: 500px;
-  overflow: auto;
-
-  ul {
-    margin: 0;
-    padding: 0;
-
-    li {
-      margin-bottom: 5px;
-    }
-  }
-`
-
 export const AddedChips = styled.div`
   margin-bottom: 25px;
   display: flex;

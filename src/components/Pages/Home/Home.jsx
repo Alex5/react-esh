@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {NavLink, Route, useLocation} from "react-router-dom";
+import {NavLink, Route, useLocation, useParams} from "react-router-dom";
 import {searchAPI} from "../../../api/Api";
 
 import {Content, ContentBody, ContentTitle, HomeWrapper, SideBar, StyledMain} from "./HomeStyle";
@@ -7,37 +7,24 @@ import Loader from "../../../services/Loader";
 import {ContentItem} from "../index";
 import {GlobalStyle} from "../../../AppStyle";
 
-import compilationsData from './compilations-data.json'
-
 const Home = () => {
     const [newRecipes, setNewRecipes] = useState([]);
-    const [title, setTitle] = useState('');
-    const [compilationIngredients, setCompilationIngredients] = useState([]);
+    const [compilationNames, setCompilationNames] = useState([]);
     const [recipesLoad, setRecLoad] = useState(false);
     const location = useLocation()
 
     useEffect(() => {
         setRecLoad(true);
-        getCompilation(location.pathname)
-        searchAPI
-            .getRecipes(compilationIngredients)
-            .then(({data}) => {
-                setNewRecipes(data.items)
-                setRecLoad(false);
-            })
-            .catch((ERR) => {
-                if (ERR.response.status === 500) {
-                    setRecLoad(false);
-                }
-            });
-    }, [compilationIngredients])
+        getNewRecipes(0)
+        searchAPI.getActualLabels('-180').then(({data}) => {
+            setCompilationNames(data)
+        })
+    }, [])
 
-    const getCompilation = (path) => {
-        compilationsData.compilations.forEach((item) => {
-            if (path === item.path) {
-                setCompilationIngredients(item.ingredients)
-                setTitle(item.name)
-            }
+    const getNewRecipes = (linkId) => {
+        searchAPI.getActual('-180', linkId).then((res) => {
+            setNewRecipes(res.data)
+            setRecLoad(false)
         })
     }
 
@@ -46,23 +33,26 @@ const Home = () => {
             <GlobalStyle scrollHide/>
             <SideBar>
                 <ul>
-                    {compilationsData.menus.map(link =>
-                        <li key={link.id}>
-                            <NavLink activeClassName={"active"}
-                                     exact
-                                     to={`${link.path}`}
-                                     onClick={() => getCompilation(link.path)}>{link.name}
+                    <li>
+                        <NavLink activeClassName={"active"} exact to={`/`}>
+                            Лента
+                        </NavLink>
+                    </li>
+                    {compilationNames.map(link =>
+                        <li onClick={() => getNewRecipes(link.id)} key={link.id}>
+                            <NavLink activeClassName={"active"} to={`/actual/${link.id}`}>
+                                {link.label}
                             </NavLink>
                         </li>
                     )}
                 </ul>
             </SideBar>
             <HomeWrapper>
-                <Content browserHeight={document.body.clientHeight}>
-                    <Route path={location.pathname}>
-                        <ContentTitle>{title}</ContentTitle>
+                <Content>
+                    <Route path={[`/actual`, `/`]}>
+                        {/*<ContentTitle>{location.pathname.replace('/','')}</ContentTitle>*/}
                         <ContentBody>
-                            {recipesLoad ? <Loader/> : newRecipes.map(item =>
+                            {recipesLoad ? <Loader/> : newRecipes[0]?.items.map(item =>
                                 <ContentItem key={item.id} {...item}/>
                             )}
                         </ContentBody>

@@ -151,7 +151,7 @@ export const StyledIngredients = styled.div`
   }
 `
 
-export const StyledRecipes = styled.div`
+export const StyledResult = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
@@ -162,7 +162,9 @@ export const StyledRecipes = styled.div`
   }
 
   ul {
-    margin: 0;
+    display: grid;
+    grid-template-columns: ${props => props.chipItems.length > 0 ? '1fr 1fr 1fr' : '1fr'};
+    grid-gap: 15px;
     padding: 0;
     max-height: 500px;
     overflow: auto;
@@ -173,5 +175,10 @@ export const StyledRecipes = styled.div`
     text-decoration: none;
     color: black;
   }
+`
+
+export const StyledResultHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
