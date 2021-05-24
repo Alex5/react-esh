@@ -8,22 +8,22 @@ import {ContentItem} from "../index";
 import {GlobalStyle} from "../../../AppStyle";
 
 const Home = () => {
-    const [newRecipes, setNewRecipes] = useState([]);
+    const [newRecipes, setNewRecipes] = useState({label: '', items: []});
     const [compilationNames, setCompilationNames] = useState([]);
     const [recipesLoad, setRecLoad] = useState(false);
 
     useEffect(() => {
         setRecLoad(true);
         getNewRecipes(0)
-        searchAPI.getActualLabels('-180').then(({data}) => {
+        searchAPI.getActualLabels(0).then(({data}) => {
             setCompilationNames(data)
         })
     }, [])
 
     const getNewRecipes = (linkId) => {
         setRecLoad(true);
-        searchAPI.getActual('-180', linkId).then((res) => {
-            setNewRecipes(res.data)
+        searchAPI.getActual(-180, linkId).then(({data}) => {
+            setNewRecipes(data)
             setRecLoad(false)
         })
     }
@@ -33,11 +33,6 @@ const Home = () => {
             <GlobalStyle scrollHide/>
             <SideBar>
                 <ul>
-                    <li>
-                        <NavLink activeClassName={"active"} exact to={`/`}>
-                            Лента
-                        </NavLink>
-                    </li>
                     {compilationNames.map(link =>
                         <li onClick={() => getNewRecipes(link.id)} key={link.id}>
                             <NavLink activeClassName={"active"} to={`/actual/${link.id}`}>
@@ -51,7 +46,7 @@ const Home = () => {
                 <Content>
                     <Route path={[`/actual`, `/`]}>
                         <ContentBody>
-                            {recipesLoad ? <Loader/> : newRecipes[0]?.items.map(item =>
+                            {recipesLoad ? <Loader/> : newRecipes.items.map(item =>
                                 <ContentItem key={item.id} {...item}/>
                             )}
                         </ContentBody>

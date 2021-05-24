@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
     // withCredentials: true,
-    baseURL: "https://intense-reef-89831.herokuapp.com",
+    baseURL: "https://esh-backend.herokuapp.com/api/",
     params: {
         mode: 1,
     },
