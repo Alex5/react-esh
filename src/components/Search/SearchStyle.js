@@ -46,10 +46,10 @@ export const StyledInput = styled.div`
     right: 15px;
     background-color: unset;
     background-image: url(${closeBlack});
-    
     background-repeat: no-repeat;
   }
 `
+
 
 export const StyledDropDown = styled.div`
   position: absolute;
