@@ -2,12 +2,13 @@ import {FC} from 'react'
 import {IIngredient} from "../../types/types";
 
 interface IngredientItemProps {
-    ingredient: IIngredient
+    ingredient: IIngredient,
+    onClick?: (item: {}) => void
 }
 
-const IngredientItem: FC<IngredientItemProps> = ({ingredient}) => {
+const IngredientItem: FC<IngredientItemProps> = ({ingredient, onClick}) => {
     return (
-        <li>{ingredient.name}</li>
+        <li onClick={onClick}>{ingredient.name}</li>
     )
 }
 

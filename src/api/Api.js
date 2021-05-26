@@ -24,6 +24,12 @@ export const searchAPI = {
         });
     },
     getRecipes(newChipItems) {
+        // const newItem = {
+        //     name: item.name,
+        //     id: item._id,
+        //     count: 0.0,
+        //     exclude: false,
+        // }
         return instance.post(`getRecipes/`, newChipItems).then(res => {
             setUUID(res);
             return res;

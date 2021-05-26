@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
-import {setChips, setRecipes, onIngrInput, foundIngredient} from "../../redux/searchSlice";
+import {setChips, setRecipes, onIngInput, foundIngredient} from "../../redux/searchSlice";
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
-import {Button, ChipItem, RecipeItem, SearchPopup} from "../index";
+import {Button, SearchPopup} from "../index";
 import {searchAPI} from "../../api/Api";
 
 import searchIcon from '../../assets/img/search.svg'
@@ -18,16 +18,20 @@ import {
 import {setActivePopup} from "../../redux/servicesSlice";
 import List from "./Lists/List";
 import IngredientItem from "./IngredientItem";
+import ChipItem from "../Result/ChipItem/ChipItem";
+import {IIngredient, IChip, IRecFromIng} from "../../types/types";
+import {ISearchState, IServicesState} from "../../types/SearchTypes";
 
 const Search = () => {
-    const [load, onLoad] = React.useState(false)
-    const [recipesFromIng, setRecipesFromIng] = React.useState({items: [], total: 0})
-    const inputValue = useSelector((state) => state.search.inputIngrValue);
-    const activePopup = useSelector((state) => state.services.activePopup);
+    const [load, onLoad] = React.useState<boolean>(false)
+    const [recipesFromIng, setRecipesFromIng] = React.useState<IRecFromIng>({items: [], total: 0})
+
     const dispatch = useDispatch();
-    const chipItems = useSelector((state) => state.search.chipItems);
+    const inputValue = useSelector((state: ISearchState) => state.search.inputIngValue);
+    const activePopup = useSelector((state: IServicesState) => state.services.activePopup);
+    const chipItems = useSelector((state: ISearchState) => state.search.chipItems);
     const foundIngredients = useSelector(
-        (state) => state.search.foundIngredients
+        (state: ISearchState) => state.search.foundIngredients
     );
 
     useEffect(() => {
@@ -40,9 +44,9 @@ const Search = () => {
         }
     }, [chipItems])
 
-    const onIngInput = (value) => {
+    const onInput = (value: string) => {
         onLoad(true)
-        dispatch(onIngrInput(value));
+        dispatch(onIngInput(value));
         if (value.length >= 3) {
             searchAPI.getIngAndRecipes(value).then((res) => {
                 dispatch(foundIngredient(res[0].data))
@@ -54,23 +58,17 @@ const Search = () => {
         onLoad(false)
     };
 
-    const onAddChip = (item) => {
-        let newChipItems = new Set([...chipItems])
-        const newItem = {
-            name: item.name,
-            id: item._id,
-            count: 0.0,
-            exclude: false,
-        }
-        newChipItems.add(newItem)
-        dispatch(setChips([...newChipItems]))
-    };
+    // const onAddChip = (item: {}) => {
+    //     let newChipItems = new Set([...chipItems])
+    //     newChipItems.add(item)
+    //     dispatch(setChips([...newChipItems]))
+    // };
 
     return (
         <StyledSearch>
             <StyledInput inputValue={inputValue.length} activePopup={activePopup}>
                 {load ? <Loader/> : <img className={"search-icon"} src={searchIcon} alt="search"/>}
-                <input onInput={(e) => onIngInput(e.target.value)}
+                <input onInput={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)}
                        onFocus={() => dispatch(setActivePopup(true))}
                        value={inputValue}
                        placeholder={"Ингредиенты, рецепты"}
@@ -78,29 +76,31 @@ const Search = () => {
                 <button onClick={() => {
                     setRecipesFromIng({items: [], total: 0})
                     dispatch(foundIngredient([]))
-                    dispatch(onIngrInput(''))
+                    dispatch(onIngInput(''))
                 }} className={"close-button"}>
                 </button>
                 <StyledDropDown activePopup={activePopup}>
                     <StyledIngredients>
                         <h3>Ингредиенты</h3>
-                        <List items={foundIngredients} renderItem={IngredientItem}/>
+                        <List items={foundIngredients}
+                              renderItem={(ingredient: IIngredient) => <IngredientItem
+                                  ingredient={ingredient}
+                                  key={ingredient._id}/>}/>
                     </StyledIngredients>
-                    <StyledResult chipItems={chipItems}>
+                    <StyledResult chipItems={chipItems.length}>
                         <StyledResultHeader>
                             <h3>{chipItems?.length > 0 ? 'Добавленные' : 'Рецепты'}</h3>
                             {chipItems?.length > 0
                                 ? <Button onClick={async () => {
                                     await dispatch(setChips([]))
-                                    await dispatch(onIngrInput(''))
+                                    await dispatch(onIngInput(''))
                                 }} outline
                                           small>Очистить</Button>
                                 : <></>}
                         </StyledResultHeader>
-                        {chipItems.length === 0
-                            ? <List items={chipItems} renderItem={ChipItem}/>
-                            : <List items={recipesFromIng} renderItem={RecipeItem}/>
-                        }
+                        <List items={chipItems}
+                              renderItem={(chip: IChip) => <ChipItem chip={chip} key={chip.id}/>}/>
+                        {/*<List items={recipesFromIng} renderItem={RecipeItem}/>*/}
                         {/*<ul>*/}
                         {/*    {chipItems.length !== 0*/}
                         {/*        ? chipItems.map(chip =>*/}

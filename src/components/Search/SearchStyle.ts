@@ -6,7 +6,7 @@ export const StyledSearch = styled.div`
   width: 100%;
 `
 
-export const StyledInput = styled.div`
+export const StyledInput = styled.div<{activePopup: boolean, inputValue: number}>`
   z-index: 20;
   width: 100%;
   position: relative;
@@ -51,7 +51,7 @@ export const StyledInput = styled.div`
 `
 
 
-export const StyledDropDown = styled.div`
+export const StyledDropDown = styled.div<{activePopup: boolean}>`
   position: absolute;
   top: 38px;
   width: 100%;
@@ -90,7 +90,7 @@ export const StyledIngredients = styled.div`
   }
 `
 
-export const StyledResult = styled.div`
+export const StyledResult = styled.div<{chipItems: number}>`
   display: flex;
   flex-direction: column;
   padding: 15px;
@@ -102,7 +102,7 @@ export const StyledResult = styled.div`
 
   ul {
     display: grid;
-    grid-template-columns: ${props => props.chipItems.length > 0 ? '1fr 1fr 1fr' : '1fr'};
+    grid-template-columns: ${props => props.chipItems > 0 ? '1fr 1fr 1fr' : '1fr'};
     grid-gap: 15px;
     padding: 0;
     max-height: calc(100vh - 250px);
